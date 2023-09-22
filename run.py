@@ -7,7 +7,9 @@ import hashlib
 from account import Account
 from password import Password
 
-
+PASSWORD_CHARACTERS = 10
+PASSWORD_NUMBERS = 2
+PASSWORD_SPECIAL_CHARACTERS = 2
 
 
 def get_account_data():
@@ -26,20 +28,76 @@ def get_account_data():
         username =  input("Enter the username here:\n")
         
         (print(f"You are a creating a password for {service} and your username is {username}"))
-        approval =(input("Are the service and username correct ? (yes/or no) "))
+        #TODO add lowercase
+        approval =(input("Are the service and username correct ? (yes/or no)\n"))
         if approval == "yes":
             account = Account(service, username)
             return account
         
 def get_password_info():
     """
-    takes user input required to generate password
+    Generates password instance
     """
-    pass
-
+    no_confirmation = True
+    while no_confirmation:
+        print("This script will generate a random password including:\n") 
+        print(f"{PASSWORD_CHARACTERS} characters in total \n")
+        print(f"{PASSWORD_NUMBERS} numbers \n")
+        print(f"{PASSWORD_SPECIAL_CHARACTERS} special characters \n")
+        #TODO add lower case
+        approval =  input("Do you want to keep this settings? (yes/no)\n")
+        if approval == "yes":
+            no_confirmation = False
+            password = Password()
+        elif approval == "no":
+            edit_password_default()
+    
+    return password
+    
+def edit_password_default():
+    """
+    if user disagrees with default password setting edit them
+    """
+    validation = False
+    while not validation:
+        try:
+            password_length = input((f"How many total characters do you want in your password? (enter a number e.g.10)\n" ))
+            password_length_int = int(password_length)
+        except ValueError:
+            print(f"You entered {password_length}, you should enter a number e.g.  10 ")
+        
+        try:
+            numbers = input((f"How many numbers do you want in your password? (enter a number e.g.2)\n" ))
+            numbers_int = int(numbers)
+        except ValueError:
+            print(f"You entered {numbers}, you should enter a number e.g. 10")
+        
+        try:
+            special_characters = input((f"How many special characters do you want in your password? (enter a number e.g.2)\n" ))
+            special_characters_int = int(numbers)
+        except ValueError:
+            print(f"You entered {special_characters}, you should enter a number e.g. 10")
+        validation = validate_new_password_settings(password_length_int, numbers_int, special_characters_int)
+        
+        
+def validate_new_password_settings(password_length_int, numbers_int, special_characters_int):
+    """
+    checks if the special characters + numbers < password length
+    """
+    if numbers_int + special_characters_int <= password_length_int:
+        return True
+    else:
+        print(f"You selected {numbers_int} numbers and {special_characters_int} special characters\n")
+        print(f"{numbers_int} numbers + {special_characters_int} special characters are {numbers_int + special_characters_int} total characthers\n") 
+        print(f"{numbers_int + special_characters_int} total characthers are longehr than password length {password_length_int}\n")
+        print("Please try again")
+        return False
+                      
+    
 
 def main():
     account = get_account_data()
+    password = get_password_info()
     
 
 main()
