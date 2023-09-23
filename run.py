@@ -107,12 +107,13 @@ def validate_new_password_settings(password_length_int, numbers_int, special_cha
         print("Please try again")
         return False
                       
-    
+def generate_password(password):
+    password.add_numbers_list()
 
 def main():
     account = get_account_data()
     password = get_password_info()
-    
+    generate_password(password)
 
 main()
 # # Define your password
