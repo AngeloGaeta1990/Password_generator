@@ -17,8 +17,8 @@ def get_account_data():
     Creates the account class taking input from the user
     """
     while True:
-        (print("Welcome to the secure password generator"))
-        (print("Please enter the service you need the password for"))
+        (print("Welcome to the Secure Password Generator"))
+        (print("Please enter the service for which you need the password"))
         (print("Example: Netflix"))
         
         service = input("Enter the name of the service here:\n")
@@ -29,10 +29,13 @@ def get_account_data():
         
         (print(f"You are a creating a password for {service} and your username is {username}"))
         #TODO add lowercase
-        approval =(input("Are the service and username correct ? (yes/or no)\n"))
+        approval =(input("Are the service and username correct ? (yes or no)\n")).lower()
         if approval == "yes":
             account = Account(service, username)
             return account
+        else:
+            print(f"You entered {approval} you should type yes or no")
+            print("Please try again")
         
 def get_password_info():
     """
@@ -45,12 +48,16 @@ def get_password_info():
         print(f"{PASSWORD_NUMBERS} numbers \n")
         print(f"{PASSWORD_SPECIAL_CHARACTERS} special characters \n")
         #TODO add lower case
-        approval =  input("Do you want to keep this settings? (yes/no)\n")
+        approval =  input("Do you want to keep this settings? (yes/no)\n").lower()
         if approval == "yes":
             no_confirmation = False
             password = Password()
         elif approval == "no":
-            edit_password_default()
+             password = edit_password_default()
+             if password:
+                 no_confirmation = False
+        else:
+            print(f"You entered {approval} you should type yes or no")
     
     return password
     
@@ -64,20 +71,27 @@ def edit_password_default():
             password_length = input((f"How many total characters do you want in your password? (enter a number e.g.10)\n" ))
             password_length_int = int(password_length)
         except ValueError:
-            print(f"You entered {password_length}, you should enter a number e.g.  10 ")
+            print(f"You entered {password_length}, you should enter a number e.g.  10\n")
+            print("Let's try again.")
+            break
         
         try:
             numbers = input((f"How many numbers do you want in your password? (enter a number e.g.2)\n" ))
             numbers_int = int(numbers)
         except ValueError:
             print(f"You entered {numbers}, you should enter a number e.g. 10")
-        
+            print("Let's try again.")
+            break
         try:
             special_characters = input((f"How many special characters do you want in your password? (enter a number e.g.2)\n" ))
             special_characters_int = int(numbers)
         except ValueError:
             print(f"You entered {special_characters}, you should enter a number e.g. 10")
+            print("Let's try again.")
+            break
         validation = validate_new_password_settings(password_length_int, numbers_int, special_characters_int)
+        password= Password(password_length_int, numbers_int, special_characters_int)
+        return password
         
         
 def validate_new_password_settings(password_length_int, numbers_int, special_characters_int):
@@ -87,9 +101,9 @@ def validate_new_password_settings(password_length_int, numbers_int, special_cha
     if numbers_int + special_characters_int <= password_length_int:
         return True
     else:
-        print(f"You selected {numbers_int} numbers and {special_characters_int} special characters\n")
-        print(f"{numbers_int} numbers + {special_characters_int} special characters are {numbers_int + special_characters_int} total characthers\n") 
-        print(f"{numbers_int + special_characters_int} total characthers are longehr than password length {password_length_int}\n")
+        print(f"You have selected {numbers_int} numbers and {special_characters_int} special characters\n")
+        print(f"resulting in a total of {numbers_int + special_characters_int} characthers\n") 
+        print(f"this exceeds the desired password length of {password_length_int} characthers\n")
         print("Please try again")
         return False
                       
