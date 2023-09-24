@@ -10,6 +10,7 @@ from password import Password
 PASSWORD_CHARACTERS = 10
 PASSWORD_NUMBERS = 2
 PASSWORD_SPECIAL_CHARACTERS = 2
+PASSWORD_UPPER_CASE_CHARACTERS = 2
 
 
 def get_account_data():
@@ -47,6 +48,7 @@ def get_password_info():
         print(f"{PASSWORD_CHARACTERS} characters in total \n")
         print(f"{PASSWORD_NUMBERS} numbers \n")
         print(f"{PASSWORD_SPECIAL_CHARACTERS} special characters \n")
+        print(f"{PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n")
         #TODO add lower case
         approval =  input("Do you want to keep this settings? (yes/no)\n").lower()
         if approval == "yes":
@@ -89,26 +91,37 @@ def edit_password_default():
             print(f"You entered {special_characters}, you should enter a number e.g. 10")
             print("Let's try again.")
             break
-        validation = validate_new_password_settings(password_length_int, numbers_int, special_characters_int)
-        password= Password(password_length_int, numbers_int, special_characters_int)
+        try:
+            upper_case_letters = input((f"How many upper case letters do you want in your password? (enter a number e.g.2)\n" ))
+            upper_case_letters_int = int(upper_case_letters)
+        except ValueError:
+            print(f"You entered {upper_case_letters}, you should enter a number e.g. 10")
+            print("Let's try again.")
+            break
+           
+        validation = validate_new_password_settings(password_length_int, numbers_int, special_characters_int, upper_case_letters_int)
+        password= Password(password_length_int, numbers_int, special_characters_int, upper_case_letters_int)
         return password
         
         
-def validate_new_password_settings(password_length_int, numbers_int, special_characters_int):
+def validate_new_password_settings(password_length_int, numbers_int, special_characters_int, upper_case_letters_int):
     """
     checks if the special characters + numbers < password length
     """
-    if numbers_int + special_characters_int <= password_length_int:
+    if numbers_int + special_characters_int + special_characters_int <= password_length_int:
         return True
     else:
-        print(f"You have selected {numbers_int} numbers and {special_characters_int} special characters\n")
-        print(f"resulting in a total of {numbers_int + special_characters_int} characthers\n") 
+        print(f"You have selected {numbers_int} numbers, {special_characters_int} special characters and {upper_case_letters_int} upper case letters\n")
+        print(f"resulting in a total of {numbers_int + special_characters_int + upper_case_letters_int} characthers\n") 
         print(f"this exceeds the desired password length of {password_length_int} characthers\n")
         print("Please try again")
         return False
                       
 def generate_password(password):
     password.add_numbers_list()
+    password.add_special_charaters()
+    password.add_lower_case_letters()
+    
 
 def main():
     account = get_account_data()
