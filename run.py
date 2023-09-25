@@ -78,24 +78,24 @@ def edit_password_default():
             break
         
         try:
-            numbers = input((f"How many numbers do you want in your password? (enter a number e.g.2)\n" ))
-            numbers_int = int(numbers)
+            numbers_length = input((f"How many numbers do you want in your password? (enter a number e.g.2)\n" ))
+            numbers_int = int(numbers_length)
         except ValueError:
-            print(f"You entered {numbers}, you should enter a number e.g. 10")
+            print(f"You entered {numbers_length}, you should enter a number e.g. 10")
             print("Let's try again.")
             break
         try:
-            special_characters = input((f"How many special characters do you want in your password? (enter a number e.g.2)\n" ))
-            special_characters_int = int(numbers)
+            special_characters_length = input((f"How many special characters do you want in your password? (enter a number e.g.2)\n" ))
+            special_characters_int = int(special_characters_length)
         except ValueError:
-            print(f"You entered {special_characters}, you should enter a number e.g. 10")
+            print(f"You entered {special_characters_length}, you should enter a number e.g. 10")
             print("Let's try again.")
             break
         try:
-            upper_case_letters = input((f"How many upper case letters do you want in your password? (enter a number e.g.2)\n" ))
-            upper_case_letters_int = int(upper_case_letters)
+            upper_case_length = input((f"How many upper case letters do you want in your password? (enter a number e.g.2)\n" ))
+            upper_case_letters_int = int(upper_case_length)
         except ValueError:
-            print(f"You entered {upper_case_letters}, you should enter a number e.g. 10")
+            print(f"You entered {upper_case_length}, you should enter a number e.g. 10")
             print("Let's try again.")
             break
            
@@ -120,7 +120,9 @@ def validate_new_password_settings(password_length_int, numbers_int, special_cha
 def generate_password(password):
     password.add_numbers_list()
     password.add_special_charaters()
+    password.add_upper_case_letters()
     password.add_lower_case_letters()
+    password.generate_password()
     
 
 def main():
