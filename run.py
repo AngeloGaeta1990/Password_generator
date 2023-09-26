@@ -16,19 +16,18 @@ def get_account_data():
     Creates the account class taking input from the user
     """
     while True:
-        (print("Welcome to the Secure Password Generator"))
-        (print("Please enter the service for which you need the password"))
-        (print("Example: Netflix"))
+        print("Welcome to the Secure Password Generator")
+        print("Please enter the service for which you need the password")
+        print("Example: Netflix")
         
         service = input("Enter the name of the service here:\n")
         
-        (print("Please enter the username"))
-        (print("Example: my_email@provider.com"))
+        print("Please enter the username")
+        print("Example: my_email@provider.com")
         username =  input("Enter the username here:\n")
         
-        (print(f"You are a creating a password for {service} and your username is {username}"))
-        #TODO add lowercase
-        approval =(input("Are the service and username correct ? (yes or no)\n")).lower()
+        print(f"You are a creating a password for {service} and your username is {username}")
+        approval =input("Are the service and username correct ? (yes or no)\n").lower()
         if approval == "yes":
             account = Account(service, username)
             return account
@@ -130,7 +129,7 @@ def generate_password(password):
             user_like = True
     return password
         
-def api_verification (password):
+def api_verification(password):
     """
     turns password into hash code and checks if password has been hacked
     """
@@ -138,10 +137,23 @@ def api_verification (password):
     password.check_hacked_password()
     return password
 
+def update_account(account, password):
+    """
+    Adds password and secure info to account instance
+    """
+    account.password = password.pwd
+    if password.secure == True:
+        account.secure = "Verified"
+    print(account.password)
+    print(account.secure)
+    return account
+    
+
 def main():
     account = get_account_data()
     password_info = get_password_info()
     password = generate_password(password_info)
     password_api = api_verification(password)
+    updated_account = update_account(account,password_api)
     
 main()

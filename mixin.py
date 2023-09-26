@@ -15,7 +15,7 @@ class Mixin:
     
     def generate_random_special_characters(self, amount):
         """
-        generates a list of random numbers
+        generates a list of special characters
         """
         all_special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', 
                                   '{', '}', ';', ':', '<', '>', ',', '.', '/', '?', '|', '\\', '`', '~']

@@ -23,6 +23,7 @@ class Password(Mixin):
       self.secure = bool() True if API reported password has not been found in data breaches, False otherwise, None if no API response
 
     """
+    PWNED_API_URL = "https://api.pwnedpasswords.com/range/"
 
     def __init__(self, length=10, numbers_length=2, special_characters_length=2, upper_case_length=2):
         self.length = length
@@ -92,24 +93,27 @@ class Password(Mixin):
         Sends hash code to Pwned Passwords API and verifies if API has been hacked
         """
         print("Reaching Pwned Password API")
-        url = f"https://api.pwnedpasswords.com/range/{self.prefix}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            suffix = self.hash_code[5:]
-            for line in response.text.splitlines():
-                if line.startswith(suffix):
-                    self.secure = False
-                    break
-                else:
-                    self.secure = True
-            if self.secure == False:
-                print(
-                    f"The password '{self.pwd}' has been exposed {line.split(':')[1]} times in data breaches.")
-            elif self.secure == True:
-                print(
-                    f"The password '{self.pwd}' has not been found in data breaches.")
-        else:
-            print("Warning: Unable to connect to the API. I can not check if your password has alredy been exposed")
+        try:
+              response = requests.get(
+                f"{self.PWNED_API_URL}{self.prefix}")
+              if response.status_code == 200:
+                  suffix = self.hash_code[5:]
+                  for line in response.text.splitlines():
+                      if line.startswith(suffix):
+                          self.secure = False
+                          break
+                      else:
+                          self.secure = True
+                  if self.secure == False:
+                      print(
+                          f"The password '{self.pwd}' has been exposed {line.split(':')[1]} times in data breaches.")
+                  elif self.secure == True:
+                      print(
+                          f"The password '{self.pwd}' has not been found in data breaches.")
+              else:
+                  print("Warning: Unable to connect to the API. I can not check if your password has alredy been exposed")
+        except requests.exceptions.RequestException as e:
+            print(f"API request error: {e}")
             
             
     def builder(self):
