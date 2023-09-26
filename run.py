@@ -2,8 +2,6 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
-import requests
-import hashlib
 from account import Account
 from password import Password
 
@@ -49,7 +47,6 @@ def get_password_info():
         print(f"{PASSWORD_NUMBERS} numbers \n")
         print(f"{PASSWORD_SPECIAL_CHARACTERS} special characters \n")
         print(f"{PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n")
-        #TODO add lower case
         approval =  input("Do you want to keep this settings? (yes/no)\n").lower()
         if approval == "yes":
             no_confirmation = False
@@ -118,43 +115,33 @@ def validate_new_password_settings(password_length_int, numbers_int, special_cha
         return False
                       
 def generate_password(password):
-    password.add_numbers_list()
-    password.add_special_charaters()
-    password.add_upper_case_letters()
-    password.add_lower_case_letters()
-    password.generate_password()
-    
+    """
+    generate the password string, it generates numbers, special characters, upper and lower case letters list
+    then shuffles the characters, show to the user the password and asks if it should be kept or a new one should
+    be generated
+    """
+    print("Generating password...")
+    user_like = False
+    while not user_like:
+        password.builder()
+        print(f"The password generated is\n {password.pwd}")
+        user_decision = input("Do you want to keep this password? (yes/no)\n(If 'no' a new password will be generated)\n").lower()
+        if user_decision == "yes":
+            user_like = True
+    return password
+        
+def api_verification (password):
+    """
+    turns password into hash code and checks if password has been hacked
+    """
+    password.generate_hash_code()
+    password.check_hacked_password()
+    return password
 
 def main():
     account = get_account_data()
-    password = get_password_info()
-    generate_password(password)
-
+    password_info = get_password_info()
+    password = generate_password(password_info)
+    password_api = api_verification(password)
+    
 main()
-# # Define your password
-# password = "hello123"
-
-# # Create a SHA-1 hash of the password
-# password_hash = hashlib.sha1(password.encode()).hexdigest().upper()
-# print("pwd_hash",password_hash)
-
-# # Take the first 5 characters of the hash
-# prefix = password_hash[:5]
-# print("prefix",prefix)
-
-# # Make a GET request to the "Pwned Passwords" API
-# url = f"https://api.pwnedpasswords.com/range/{prefix}"
-# response = requests.get(url)
-# print(response.text)
-
-# if response.status_code == 200:
-#     # Check if the remaining part of the hash exists in the API response
-#     suffix = password_hash[5:]
-#     for line in response.text.splitlines():
-#         if line.startswith(suffix):
-#             print(f"The password '{password}' has been exposed {line.split(':')[1]} times in data breaches.")
-#             break
-#     else:
-#         print(f"The password '{password}' has not been found in data breaches.")
-# else:
-#     print("Error: Unable to connect to the API.")
