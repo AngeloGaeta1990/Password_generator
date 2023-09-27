@@ -2,6 +2,7 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
+import csv
 from account import Account
 from password import Password
 
@@ -31,6 +32,8 @@ def get_account_data():
         if approval == "yes":
             account = Account(service, username)
             return account
+        elif approval == "no":
+            pass
         else:
             print(f"You entered {approval} you should type yes or no")
             print("Please try again")
@@ -69,7 +72,7 @@ def edit_password_default():
             password_length = input((f"How many total characters do you want in your password? (enter a number e.g.10)\n" ))
             password_length_int = int(password_length)
         except ValueError:
-            print(f"You entered {password_length}, you should enter a number e.g.  10\n")
+            print(f"You entered {password_length}, you should enter an integer number e.g.  10\n")
             print("Let's try again.")
             break
         
@@ -77,22 +80,19 @@ def edit_password_default():
             numbers_length = input((f"How many numbers do you want in your password? (enter a number e.g.2)\n" ))
             numbers_int = int(numbers_length)
         except ValueError:
-            print(f"You entered {numbers_length}, you should enter a number e.g. 10")
-            print("Let's try again.")
+            print(f"You entered {numbers_length}, you should enter an integer number e.g. 10\nLet's try again.")
             break
         try:
             special_characters_length = input((f"How many special characters do you want in your password? (enter a number e.g.2)\n" ))
             special_characters_int = int(special_characters_length)
         except ValueError:
-            print(f"You entered {special_characters_length}, you should enter a number e.g. 10")
-            print("Let's try again.")
+            print(f"You entered {special_characters_length}, you should enter an integer number e.g. 10\nLet's try again.")
             break
         try:
             upper_case_length = input((f"How many upper case letters do you want in your password? (enter a number e.g.2)\n" ))
             upper_case_letters_int = int(upper_case_length)
         except ValueError:
-            print(f"You entered {upper_case_length}, you should enter a number e.g. 10")
-            print("Let's try again.")
+            print(f"You entered {upper_case_length}, you should enter a number e.g. 10\nLet's try again.")
             break
            
         validation = validate_new_password_settings(password_length_int, numbers_int, special_characters_int, upper_case_letters_int)
@@ -127,6 +127,8 @@ def generate_password(password):
         user_decision = input("Do you want to keep this password? (yes/no)\n(If 'no' a new password will be generated)\n").lower()
         if user_decision == "yes":
             user_like = True
+        else:
+            print(f"You entered {user_decision}, please enter yes or no")
     return password
         
 def api_verification(password):
@@ -143,11 +145,35 @@ def update_account(account, password):
     """
     account.password = password.pwd
     if password.secure == True:
-        account.secure = "Verified"
-    print(account.password)
-    print(account.secure)
+        account.secure = "Verified" 
     return account
+
+def create_password_file(account, filename = "secure_passwords.csv"):
+    """
+    takes an account object in input
+    and creates a .csv file listing Account, User name, Password and security 
+    """
+    account_dict = account.account_dict()
+    headers = account_dict.keys()
+    account_list = [account_dict]
     
+    file_exists = False
+    try:
+        with open(filename, 'r') as csvfile:
+            existing_headers = next(csv.reader(csvfile))
+            if existing_headers == list(headers):
+                file_exists = True
+                file_writing_mode = 'a' 
+    except FileNotFoundError:
+            file_writing_mode = 'w'
+    
+    
+    with open(filename,file_writing_mode, newline='') as csvfile:
+        csv_writer = csv.DictWriter(csvfile, fieldnames=headers)
+        
+        if not file_exists:
+            csv_writer.writeheader()
+        csv_writer.writerows(account_list)
 
 def main():
     account = get_account_data()
@@ -155,5 +181,6 @@ def main():
     password = generate_password(password_info)
     password_api = api_verification(password)
     updated_account = update_account(account,password_api)
+    create_password_file(updated_account)
     
 main()
