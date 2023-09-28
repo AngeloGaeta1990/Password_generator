@@ -27,7 +27,39 @@ While services like LastPass and Google Passwords offer secure password storage,
 - **User-Friendly Output**: Upon generating a secure password, the tool exports the results to a .csv file named "secure_password.csv." This file contains fields for the account (e.g., Netflix), user identifier (user or user@mail.com), the generated password (e.g., mY_r8nd0m_pwd!), and a verification status indicating whether the password has been PWNED or not.
 
 - **Ultimate Privacy**: Rest assured that the generated .csv file remains completely confidential and is not accessible on Heroku or any online platform, ensuring your password data is for your eyes only.
+---
 
+## Bugs fixing
+---
+1. **Error**: If the user enters the wrong setting in "How many total characters?", it moves to the next question.
+**Solution**: Added a break statement at the end of each try.
 
+2. **Error**: Formulation of "Please enter the service you need the password for."
+**Solution**: Corrected the wording.
 
+3. **Error**: Formulation of "You selected 8 numbers and 8 special characters. 8 numbers + 8 special characters are 16 total characters. 16 total characters are longer than the password length of 1."
+**Solution**: Corrected to: "You have selected 8 numbers and 8 special characters, resulting in a total of 16 characters. This exceeds the desired password length of 1 character."
 
+4. **Error**: Infinite loop if the user edits password settings.
+**Solution**: If a password is returned, no_confirmation becomes false.
+
+5. **Error**: TypeError: Mixin.generate_random_numbers() takes 1 positional argument but 2 were given.
+**Solution**: Added self into def generate_random_numbers(self, amount).
+
+6. **Error**: def generate_random_special_characters in mixin returns a boolean rather than values.
+**Solution**: Replaced list comprehension with random.sample.
+
+7. **Error**: The developer forgot to differentiate between lowercase and uppercase letters for passwords.
+**Solution**: Uppercase letters will be added to customization alongside special characters and numbers, which have already been added.
+
+8. **Error**: During input acquisition, the special characters variable was set to take input from the number variable.
+**Solution**: Assigned the variable to special_characters correctly.
+
+9. **Error**: account_dict = account.account_dict() AttributeError: 'function' object has no attribute 'account_dict'.
+**Solution**: Rather than a variable, a function was set as input.
+
+10. **Error**: heroku module not found.
+**Solution**: Update requirements.txt.
+
+11. **Error**: secure_passwords.csv reported in GitHub.
+**Solution**: The .gitignore file contains a typo in the filename.
