@@ -27,9 +27,32 @@ No verification is performed on this input as length and type of account can tak
 ![Account and user name promt](/media/user_and_account.png)
 
 It then ask the user to verify that the info entered are correct.
-The user input will be turned in lower case therefore YES, Yes and yes will all prompt the next step.
+The user input will be turned in lower case therefore `YES`, `Yes` and `yes` will all prompt the next step.
 
 ![Account and user name veirification](/media/user_and_account_verification.png)
+
+if the answer is `no` or different from `YES`, `Yes`, or `yes` the user will be propted to re enter the service and user name.
+Furthemore is the anwers is different from `yes` or `no`, the algorithm will tell the user that the options added are incorrect, will show the user the option inserted and will ask him to re-enter the username and service.
+If instead the user just selects `no`, then no error will be shown, but the algorithm will prompt to reenter service and user name. 
+
+![User name and service re-prompt](/media/username_and_service_reprompt.png)
+
+if the user answer is yes then the tool will ask if the user wants to generate a passowrd with the defaul settings: 
+
+- `10` ttoal characters total
+- `2` numbers
+- `2` special character
+- `2` upper case letter
+
+![Default settings](/media/default_settings.png)
+
+As per before the input of the user will be turned into lower case.
+This time if the user selects yes then algorithm will generate a password with the default settings
+
+![default setting](place holder add image)
+
+if the answer is no the the user can edit the default settings:
+
 
 
 ## Key Features and Benefits:
