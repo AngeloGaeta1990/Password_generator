@@ -39,20 +39,40 @@ If instead the user just selects `no`, then no error will be shown, but the algo
 
 if the user answer is yes then the tool will ask if the user wants to generate a passowrd with the defaul settings: 
 
-- `10` ttoal characters total
+- `10` total characters
 - `2` numbers
 - `2` special character
 - `2` upper case letter
 
-![Default settings](/media/default_settings.png)
+![Password with default settings](/media/default_password.png)
 
 As per before the input of the user will be turned into lower case.
-This time if the user selects yes then algorithm will generate a password with the default settings
+This time if the user selects yes then algorithm will generate a password with the default settings.
 
-![default setting](place holder add image)
+The user can choose if to keep this password or not.
+As per before the user input is capitalized, then if the answer is yes the algorithm will proceed to the next steps if instead answer is no a new password will be generated with the same settings.
 
-if the answer is no the the user can edit the default settings:
+![Regenerate password](/media/regenerate_password.png)
 
+if the user decide to not keep the default settings :
+- total characters 
+- numbers
+- special character
+- upper case letter
+
+can be changed:
+
+
+![Edit default settings](/media/change_default_settings.png)
+Even in this case the use can choose if to keep the password or regenerate one using the same settings.
+When setting are edited the algorithm verifies that sum of special charaters + numbers + upper case letters is <= than the total characters provided.
+The lower case charaters to add are calculated as follows:
+total chatacters - (special charaters + numbers + upper case letters)
+
+if the condition special charaters + numbers + upper case letters is <= than the total characters is not met, and error is promptes showing the user which values have been used in input. 
+Moreover, it also shows why the condition is not met.
+
+![Invalid custom settings](/media/invalid_custom_settings.png)
 
 
 ## Key Features and Benefits:
@@ -112,3 +132,6 @@ if the answer is no the the user can edit the default settings:
 
 11. **Error**: secure_passwords.csv reported in GitHub.
 **Solution**: The .gitignore file contains a typo in the filename.
+
+12. **Error**: Even if invalid settings are provided a password is generated
+    **Solution**: To move password variable otuside the while caused the password to be generated only if validation criteria are met

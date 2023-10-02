@@ -96,8 +96,8 @@ def edit_password_default():
             break
            
         validation = validate_new_password_settings(password_length_int, numbers_int, special_characters_int, upper_case_letters_int)
-        password= Password(password_length_int, numbers_int, special_characters_int, upper_case_letters_int)
-        return password
+    password= Password(password_length_int, numbers_int, special_characters_int, upper_case_letters_int)
+    return password
         
         
 def validate_new_password_settings(password_length_int, numbers_int, special_characters_int, upper_case_letters_int):
