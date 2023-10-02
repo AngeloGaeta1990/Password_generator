@@ -21,58 +21,69 @@ Live link to [Secure Password Generator](https://git.heroku.com/secure-password-
 
 ---
 ## How to Generate a password
-The user at first enters the account and the username 
-As user name and account the user can add strings with no threshold to the length.
-No verification is performed on this input as length and type of account can take which ever input type and leght,
-![Account and user name promt](/media/user_and_account.png)
 
-It then ask the user to verify that the info entered are correct.
-The user input will be turned in lower case therefore `YES`, `Yes` and `yes` will all prompt the next step.
+1. ### Enter Account and Username
+   The user begins by entering their account name and username. These fields can accept strings of any length and type without verification.
+   ![Account and Username Prompt](/media/user_and_account.png)  
 
-![Account and user name veirification](/media/user_and_account_verification.png)
+2. ### Verify Input:
+   The tool asks the user to verify that the entered information is correct. The user's response is converted to lowercase, so `YES`, `Yes`, and `yes` are all accepted.
 
-if the answer is `no` or different from `YES`, `Yes`, or `yes` the user will be propted to re enter the service and user name.
-Furthemore is the anwers is different from `yes` or `no`, the algorithm will tell the user that the options added are incorrect, will show the user the option inserted and will ask him to re-enter the username and service.
-If instead the user just selects `no`, then no error will be shown, but the algorithm will prompt to reenter service and user name. 
+   ![Verification](/media/user_and_account_verification.png)
 
-![User name and service re-prompt](/media/username_and_service_reprompt.png)
+   If the answer is anything other than `yes`, the user is prompted to re-enter the service and username. If the response is neither `yes` nor `no`, the algorithm informs the user of the incorrect option, displays the options inserted, and asks for a username and service re-entry.
+   If the answer is `no`, no error message is displayed, but the tool prompts the user to re-enter the service and username.
 
-if the user answer is yes then the tool will ask if the user wants to generate a passowrd with the defaul settings: 
+3. ### Generate Password with Default Settings:
 
-- `10` total characters
-- `2` numbers
-- `2` special character
-- `2` upper case letter
+     If the user's response is `yes`, the tool asks if the user wants to generate a password with default settings:
 
-![Password with default settings](/media/default_password.png)
+     - `10` total characters
+     - `2` numbers
+     - `2` special characters
+     - `2` uppercase letters
 
-As per before the input of the user will be turned into lower case.
-This time if the user selects yes then algorithm will generate a password with the default settings.
+     ![Default password settings](/media/default_password.png)  
 
-The user can choose if to keep this password or not.
-As per before the user input is capitalized, then if the answer is yes the algorithm will proceed to the next steps if instead answer is no a new password will be generated with the same settings.
+     - If the user selects "yes" again, the algorithm generates a password with the default settings.
+     - The user can choose whether to keep this password. If they answer "yes," the algorithm proceeds to the next steps. If they answer "no," a new password is generated with the same default settings.
 
-![Regenerate password](/media/regenerate_password.png)
+4. ### Edit Default Settings:
 
-if the user decide to not keep the default settings :
-- total characters 
-- numbers
-- special character
-- upper case letter
+   If the user decides not to keep the default settings, they can edit the following parameters:
 
-can be changed:
+   - Total characters
+   - Number of numbers
+   - Number of special characters
+   - Number of uppercase letters
 
 
-![Edit default settings](/media/change_default_settings.png)
-Even in this case the use can choose if to keep the password or regenerate one using the same settings.
-When setting are edited the algorithm verifies that sum of special charaters + numbers + upper case letters is <= than the total characters provided.
-The lower case charaters to add are calculated as follows:
-total chatacters - (special charaters + numbers + upper case letters)
+    ![Edit default settings](/media/change_default_settings.png)  
 
-if the condition special charaters + numbers + upper case letters is <= than the total characters is not met, and error is promptes showing the user which values have been used in input. 
-Moreover, it also shows why the condition is not met.
+  - Even in this case, the user can choose whether to keep the edited password settings.
+  - When settings are edited, the algorithm checks that the sum of special characters, numbers, and uppercase letters does not exceed the total character count.
+  - The lowercase characters to add are calculated as follows: `total characters - (special characters + numbers + uppercase letters)`
+  - If the condition `special characters + numbers + uppercase letters <= total characters` is not met, an error is prompted, showing the user the input values and the reason for the error.
 
-![Invalid custom settings](/media/invalid_custom_settings.png)
+    ![Invalid custom settings](/media/invalid_custom_settings.png)
+
+5. ### Password Security Check: 
+    If the user decides to keep the password, the algorithm queries the Pwned API. It generates a hash code containing only the first 5 characters of the password and searches the API results for a matching prefix.
+
+    - If the suffix of the password appears in the API results, a message indicating that the password has been breached is displayed.
+    - If no suffix is found in the results, a message stating that the password is secure is shown.
+    - If there is an error reaching the API, the algorithm reports that the API could not be reached, and the password is not flagged as secure.
+
+
+    ![Secure password](/media/secure_password_generated.png)
+
+6. ### Save Password Information
+
+    Finally, the service, username, password, and password validation are saved to a .csv file named "secure_password.csv." If the file doesn't exist, a new one is created. If "secure_password.csv" already exists, a new line is added to the file.
+
+    ![secure_password.csv](/media/secure_password_csv.png)
+
+    - Note that the file may not be accessible via a live link due to the deployment on Heroku. Users who clone the repository on their device will be able to view and manipulate the file.
 
 
 ## Key Features and Benefits:
