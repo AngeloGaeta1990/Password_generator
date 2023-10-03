@@ -16,11 +16,39 @@ Live link to [Secure Password Generator](https://git.heroku.com/secure-password-
 ---
 - [Secure Password Generator](#secure-password-generator)
     - [Site Overview](#site-overview)
-    - [Key Features and Benefits](#key-features-and-benefits)
+- [Planning Phase](#planning-phase)
+    - [Target audience](#target-audience)
+    - [Aims](#aims)
+    - [Flow chart](#flow-chart)
+- [Features](#features)
     - [How to Generate a password](#how-to-generate-a-password)
+    - [Key Features and Benefits](#key-features-and-benefits)
+- [Future Enhancements](#future-enhancements)
+    
+       
 
+ ---
+
+## Planning Phase
 ---
-## How to Generate a password
+### Target Audience
+ - Users who lack confidence in online password management services like LastPass or Google Password.
+- Users who have concerns about sending their credentials online and prefer to store them locally on their devices.
+- Users who are already familiar with using Github.
+- The tool can also be used solely for generating a limited number of strong passwords, particularly for sensitive accounts like bank accounts, while relying on services like LastPass or Google Password for less critical services.
+
+### Aim
+1. Enhance password generation customization: Enable users to specify password length, character types (e.g., letters, numbers, symbols), and other criteria to create passwords that meet their specific security requirements.
+2. Offline mode: Allow users to generate passwords even when they are not connected to the internet, ensuring the tool's functionality in offline environments.
+3. Develop a reliable command-line interface (CLI) tool for effective user input handling and validation.
+4. Establish API integration: Create a tool that can interact seamlessly with external APIs to enhance its functionality
+
+### Flow chart
+
+![Algorithm flow chart](/media/pwd_generator.png)
+
+## Features
+### How to Generate a password
 
 1. ### Enter Account and Username
    The user begins by entering their account name and username. These fields can accept strings of any length and type without verification.
@@ -108,6 +136,13 @@ Live link to [Secure Password Generator](https://git.heroku.com/secure-password-
 
 - **Ultimate Privacy**: Rest assured that the generated .csv file remains completely confidential and is not accessible on Heroku or any online platform, ensuring your password data is for your eyes only.
 ---
+
+## Future-Enhancements
+---
+- Implement a system to assess password complexity.
+- Provide the option to input data via command line arguments, rather than relying solely on a command prompt.
+- Integrate synchronization with Google Docs or OneDrive.
+
 
 ## Bugs fixing
 ---
