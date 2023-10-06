@@ -148,6 +148,14 @@ def update_account(account, password):
         account.secure = "Verified" 
     return account
 
+def show_output_in_terminal(account):
+    """
+    Print account info on the terminal 
+    """
+    print(account.print_account())
+    print("Please sto")
+    
+
 def create_password_file(account, filename = "secure_passwords.csv"):
     """
     takes an account object in input
@@ -181,6 +189,7 @@ def main():
     password = generate_password(password_info)
     password_api = api_verification(password)
     updated_account = update_account(account,password_api)
+    show_output_in_terminal(updated_account)
     create_password_file(updated_account)
     
 main()

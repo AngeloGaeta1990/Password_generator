@@ -1,3 +1,6 @@
+from tabulate import tabulate
+
+
 class Account():
     """
     Account class, service and username must be provided to the constructor
@@ -11,6 +14,15 @@ class Account():
         self.username = username
         self.password = None
         self.secure = "Not verified"
+        
+        
+    def print_account(self):
+        """
+        Prints account info into a tabular format 
+        """
+        table_data = self.account_dict()
+        table = tabulate(table_data.items(), headers="firstrow", tablefmt="grid")
+        return table
     
     def account_dict(self):
         return{
