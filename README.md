@@ -6,7 +6,7 @@ The "Secure Password Generator" is a robust tool designed to empower users with 
 
 While services like LastPass and Google Passwords offer secure password storage, they inherently rely on online platforms, which can potentially be vulnerable to cyberattacks. The Secure Password Generator, on the other hand, provides an offline solution for users who prioritize ultimate security and control over their password creation process.
 
-Live link to [Secure Password Generator](https://git.heroku.com/secure-password-generator.git)
+Live link to [Secure Password Generator](https://secure-password-generator-618a9b17c80c.herokuapp.com/)
 
 
 ![Secure Password Generator first prompt](/media/first_prompt.png)
