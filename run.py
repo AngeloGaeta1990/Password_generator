@@ -3,6 +3,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 import csv
+import os
 from account import Account
 from password import Password
 
@@ -10,7 +11,67 @@ PASSWORD_CHARACTERS = 10
 PASSWORD_NUMBERS = 2
 PASSWORD_SPECIAL_CHARACTERS = 2
 PASSWORD_UPPER_CASE_CHARACTERS = 2
-
+MAX_PASSWORD_CHARATERS = 100
+ASCII_ART =   """
+                                                ███████║███████╗███████╗██╗   ██║██████╗ ███████╗                            
+                                                ██╔════╝██╔════╝██╔════╝██║   ██║██╔══██╗██╔════╝                            
+                                                ███████╗█████╗  ██║     ██║   ██║██████╔╝█████╗                              
+                                                ╚════██║██╔══╝  ██║     ██║   ██║██╔══██╗██╔══╝                              
+                                                ███████║███████╗╚██████╗╚██████╔╝██║  ██║███████╗                            
+            .--------.                          ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+           / .------. \ 
+          / /        \ \               ██████╗  █████╗ ███████╗███████╗██╗    ██╗ ██████╗ ██████╗ ██████╗           
+          | |        | |               ██╔══██╗██╔══██╗██╔════╝██╔════╝██║    ██║██╔═══██╗██╔══██╗██╔══██╗   
+         _| |________| |_              ██████╔╝███████║███████╗███████╗██║ █╗ ██║██║   ██║██████╔╝██║  ██║    
+       .' |_|        |_| '.            ██╔═══╝ ██╔══██║╚════██║╚════██║██║███╗██║██║   ██║██╔══██╗██║  ██║
+       '._____ ____ _____.'            ██║     ██║  ██║███████║███████║╚███╔███╔╝╚██████╔╝██║  ██║██████╔╝ 
+       |     .'____'.     |            ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝ ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ 
+       '.__.'.'    '.'.__.'
+       '.__  |      |  __.'      ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ████████╗ ██████╗ ██████╗ 
+       |   '.'.____.'.'   |     ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗
+       '.____'.____.'____.'     ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║   ██║   ██║   ██║██████╔╝
+       '.________________.'     ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║   ██║   ██║   ██║██╔══██╗                    
+                                ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║   ██║   ╚██████╔╝██║  ██║    
+                                 ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝   
+                                                                                                                                                                                                                                                                                                               
+        """
+    
+def show_intro():
+    """
+    Show ASCII art and tool instructions and centers them
+    """
+    terminal_width = os.get_terminal_size().columns
+    # ASCII_ART
+    print(ASCII_ART)
+    # Tool instructions
+    prompt_instructions = "Press I for instructions, or press Enter to start"
+    padding_instructions = (terminal_width - len(prompt_instructions)) // 2
+    centered_prompt_instructions = " " * padding_instructions + prompt_instructions
+    start_tool = (input(centered_prompt_instructions + "\n"))
+    start_tool = start_tool.lower()
+    if start_tool == "i":
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(f"""
+        This tool will generate a secure password for the account of your choice, e.g., Netflix. 
+        The generated password will not be saved in the cloud to enhance security. \n
+        
+        By default the password generated will have the different features:\n
+        
+        {PASSWORD_CHARACTERS} characters in total (max 100)\n 
+        {PASSWORD_NUMBERS} numbers \n
+        {PASSWORD_SPECIAL_CHARACTERS} special characters \n
+        {PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n
+        
+        These settings can be edited according to the user's preferences.\n
+        After generation, the password will be converted into a hash code. 
+        The hash code will be sent to the PWNED API to verify that the password has not been found in data breaches.\n
+        Follow the steps in the Terminal to generate the password
+        """
+        )
+        prompt_continue = "press Enter to continue"
+        padding_continue = (terminal_width - len(prompt_instructions)) // 2
+        centered_prompt_continue = " " * padding_continue + prompt_continue
+        input(centered_prompt_continue + "\n")
 
 def get_account_data():
     """
@@ -190,6 +251,7 @@ def create_password_file(account, filename = "secure_passwords.csv"):
         csv_writer.writerows(account_list)
 
 def main():
+    show_intro()
     account = get_account_data()
     password_info = get_password_info()
     password = generate_password(password_info)
