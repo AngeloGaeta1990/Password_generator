@@ -77,6 +77,7 @@ def get_account_data():
     """
     Creates the account class taking input from the user
     """
+    os.system('cls' if os.name == 'nt' else 'clear')
     while True:
         print("Welcome to the Secure Password Generator")
         print("Please enter the service for which you need the password")
@@ -90,6 +91,7 @@ def get_account_data():
         
         print(f"You are a creating a password for {service} and your username is {username}")
         else_account_approval = True
+        os.system('cls' if os.name == 'nt' else 'clear')
         while else_account_approval:
             approval =input(f"Are the service {service} and username {username} correct ? (yes or no)\n").lower()
             if approval == "yes":
@@ -107,14 +109,15 @@ def get_password_info():
     """
     Generates password instance
     """
+    os.system('cls' if os.name == 'nt' else 'clear')
     no_confirmation = True
+    print("This script will generate a random password including:\n") 
+    print(f"{PASSWORD_CHARACTERS} characters in total \n")
+    print(f"{PASSWORD_NUMBERS} numbers \n")
+    print(f"{PASSWORD_SPECIAL_CHARACTERS} special characters \n")
+    print(f"{PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n")
+    approval =  input("Do you want to keep this settings? (yes/no)\n").lower()
     while no_confirmation:
-        print("This script will generate a random password including:\n") 
-        print(f"{PASSWORD_CHARACTERS} characters in total \n")
-        print(f"{PASSWORD_NUMBERS} numbers \n")
-        print(f"{PASSWORD_SPECIAL_CHARACTERS} special characters \n")
-        print(f"{PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n")
-        approval =  input("Do you want to keep this settings? (yes/no)\n").lower()
         if approval == "yes":
             no_confirmation = False
             password = Password()
@@ -137,10 +140,8 @@ def edit_password_default():
             password_length = input((f"How many total characters do you want in your password? (enter a number e.g.10)\n" ))
             password_length_int = int(password_length)
         except ValueError:
-            print(f"You entered {password_length}, you should enter an integer number e.g.  10\n")
-            print("Let's try again.")
+            print(f"You entered {password_length}, you should enter an integer number e.g.  10\nLet's try again.")
             break
-        
         try:
             numbers_length = input((f"How many numbers do you want in your password? (enter a number e.g.2)\n" ))
             numbers_int = int(numbers_length)
@@ -161,11 +162,13 @@ def edit_password_default():
             break
            
         validation = validate_new_password_settings(password_length_int, numbers_int, special_characters_int, upper_case_letters_int)
-    password= Password(password_length_int, numbers_int, special_characters_int, upper_case_letters_int)
-    return password
+    if validation:
+        password= Password(password_length_int, numbers_int, special_characters_int, upper_case_letters_int)
+        return password
         
         
 def validate_new_password_settings(password_length_int, numbers_int, special_characters_int, upper_case_letters_int):
+    os.system('cls' if os.name == 'nt' else 'clear')
     """
     checks if the special characters + numbers < password length
     """
@@ -184,6 +187,7 @@ def generate_password(password):
     then shuffles the characters, show to the user the password and asks if it should be kept or a new one should
     be generated
     """
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("Generating password...")
     user_like = False
     while not user_like:
@@ -214,7 +218,7 @@ def update_account(account, password):
     return account
 
 def show_output_in_terminal(account):
-    #TODO: write meaningful indication on how to store password info
+    os.system('cls' if os.name == 'nt' else 'clear')
     """
     Print account info on the terminal 
     """
