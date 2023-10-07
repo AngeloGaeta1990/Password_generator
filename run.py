@@ -46,8 +46,8 @@ def show_intro():
     # Tool instructions
     prompt_instructions = "Press I for instructions, or press Enter to start"
     padding_instructions = (terminal_width - len(prompt_instructions)) // 2
-    centered_prompt_instructions = " " * padding_instructions
-    + prompt_instructions
+    centered_prompt_instructions = (" " * padding_instructions +
+                                    prompt_instructions)
     start_tool = (input(centered_prompt_instructions + "\n"))
     start_tool = start_tool.lower()
     if start_tool == "i":
@@ -93,7 +93,7 @@ def get_account_data():
         os.system('cls' if os.name == 'nt' else 'clear')
         while else_account_approval:
             approval = input(f"Are the service {service} and username"
-                             f"{username} correct? (yes or no)\n").lower()
+                             f" {username} correct? (yes or no)\n").lower()
             if approval == "yes":
                 account = Account(service, username)
                 else_account_approval = False
@@ -116,8 +116,9 @@ def get_password_info():
     print(f"{PASSWORD_NUMBERS} numbers \n")
     print(f"{PASSWORD_SPECIAL_CHARACTERS} special characters \n")
     print(f"{PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n")
-    approval = input("Do you want to keep this settings? (yes/no)\n").lower()
     while no_confirmation:
+        approval = input("Do you want to keep the default"
+                         " settings? (yes/no)\n").lower()
         if approval == "yes":
             no_confirmation = False
             password = Password()
@@ -137,9 +138,10 @@ def edit_password_default():
     validation = False
     while not validation:
         try:
-            password_length = input(("How many total characters do you want \
-                                     in your password? (enter a number e.g.10)\
-                                     \n"))
+            password_length = input(("How many total characters do you want"
+                                     " in your password?"
+                                     " (enter a number e.g.10)"
+                                     "\n"))
             password_length_int = int(password_length)
         except ValueError:
             print(f"You entered {password_length},"
@@ -147,8 +149,8 @@ def edit_password_default():
                   f"Let's try again.")
             break
         try:
-            numbers_length = input(("How many numbers do you want in your \
-                                    password? (enter a number e.g.2)\n"))
+            numbers_length = input(("How many numbers do you want in your"
+                                    " password? (enter a number e.g.2)\n"))
             numbers_int = int(numbers_length)
         except ValueError:
             print(f"You entered {numbers_length},"
@@ -156,9 +158,9 @@ def edit_password_default():
                   f"e.g. 10\nLet's try again.")
             break
         try:
-            special_characters_length = input(("How many special characters \
-                                               do you want in your password? \
-                                                   (enter a number e.g.2)\n"))
+            special_characters_length = input(("How many special characters"
+                                               " do you want in your password?"
+                                               " (enter a number e.g.2)\n"))
             special_characters_int = int(special_characters_length)
         except ValueError:
             print(f"You entered {special_characters_length},"
@@ -166,9 +168,9 @@ def edit_password_default():
                   f"Let's try again.")
             break
         try:
-            upper_case_length = input(("How many upper case letters \
-                                       do you want in your password? \
-                                           (enter a number e.g.2)\n"))
+            upper_case_length = input(("How many upper case letters"
+                                       " do you want in your password?"
+                                       " (enter a number e.g.2)\n"))
             upper_case_letters_int = int(upper_case_length)
         except ValueError:
             print(f"You entered {upper_case_length},"
@@ -220,9 +222,9 @@ def generate_password(password):
     while not user_like:
         password.builder()
         print(f"The password generated is\n {password.pwd}")
-        user_decision = input("Do you want to keep this password? (yes/no)\n\
-                              (If 'no' a new password will be generated)\
-                              \n").lower()
+        user_decision = input("Do you want to keep this password? (yes/no)\n"
+                              "(If 'no' a new password will be generated)"
+                              "\n").lower()
         if user_decision == "yes":
             user_like = True
         else:
