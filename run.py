@@ -149,11 +149,13 @@ def update_account(account, password):
     return account
 
 def show_output_in_terminal(account):
+    #TODO: write meaningful indication on how to store password info
     """
     Print account info on the terminal 
     """
+    print(f"The data for the {account.service} RaiPlay account are below ")
     print(account.print_account())
-    print("Please sto")
+    print("Please store this data in a secure and confidential location.")
     
 
 def create_password_file(account, filename = "secure_passwords.csv"):
