@@ -28,15 +28,19 @@ def get_account_data():
         username =  input("Enter the username here:\n")
         
         print(f"You are a creating a password for {service} and your username is {username}")
-        approval =input("Are the service and username correct ? (yes or no)\n").lower()
-        if approval == "yes":
-            account = Account(service, username)
-            return account
-        elif approval == "no":
-            pass
-        else:
-            print(f"You entered {approval} you should type yes or no")
-            print("Please try again")
+        else_account_approval = True
+        while else_account_approval:
+            approval =input(f"Are the service {service} and username {username} correct ? (yes or no)\n").lower()
+            if approval == "yes":
+                account = Account(service, username)
+                else_account_approval = False
+                return account
+            elif approval == "no":
+                 else_account_approval = False
+            else:
+                print(f"You entered {approval} you should type yes or no")
+                print("Please try again")
+            
         
 def get_password_info():
     """
@@ -153,7 +157,7 @@ def show_output_in_terminal(account):
     """
     Print account info on the terminal 
     """
-    print(f"The data for the {account.service} RaiPlay account are below ")
+    print(f"The data for the {account.service} account are below ")
     print(account.print_account())
     print("Please store this data in a secure and confidential location.")
     

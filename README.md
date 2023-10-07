@@ -29,6 +29,8 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
    - [Libraries](#libraries)
 - [Testing](#testing)
 - [Deployment](#deployment)
+   - [Heroku](#heroku)
+   - [Local](#local)
 - [Credits](#credits)
 
     
@@ -247,6 +249,8 @@ A mixin class with common methods that can be applied to other classes.
 **Solution**: Moved the password generation outside the while loop in function `edit_password_default()` to ensure it is generated only when the validation criteria are met.
 
 ## Deployment
+---
+### Heroku
 The deployment has been performed on heroku as follows:
 
 1. **Create a Heroku Account:**
@@ -305,6 +309,64 @@ You can monitor the deployment process by clicking the "View" button in the "Bui
 17. **Access Your Deployed App:**
 Once the deployment is successful, you can access your deployed app by clicking the "Open app" button at the top of the page.
 
+### Local
+Clone this repository locally to enable the generation of the 'secure_password.csv' file containing the list of created accounts and generated passwords.
+To have this repository on your local machine, follow these steps:"  
+
+1. **Open a Terminal (or Command Prompt)**:
+On your local machine, open a terminal or command prompt. You'll use this to enter commands.
+
+1. **Navigate to Your Desired Directory:**
+Use the `cd` (change directory) command to navigate to the directory where you want to create the virtual environment and clone the GitHub repository. For example:
+    ```
+    cd /path/to/your/directory
+    ```
+1. **Create a Virtual Environment:**
+Use the following command to create a virtual environment. 
+    ```
+    python -m venv pwd_generator
+    ```
+    This command will create a virtual environment named `pwd_generator` in the current directory.
+
+1. **Activate the Virtual Environment:**
+To activate the virtual environment, use the appropriate command based on your operating system:
+- On Windows:
+    ```
+    pwd_generator\Scripts\activate
+    ```
+- On macOS and Linux
+    ```
+    source pwd_generator/bin/activate
+    ```
+  You'll see the virtual environment name in your command prompt, indicating that it's active. 
+
+5. **Install Git** (if not already installed):
+If Git is not installed on your system, you can download and install it from the official Git website: https://git-scm.com/downloads  
+
+1. **Clone the GitHub Repository:**
+Use the git clone command to clone the GitHub repository. 
+    ```
+    git clone https://github.com/AngeloGaeta1990/Password_generator.git
+    ```
+   This command will download the repository files to your current directory.
+
+1. **Navigate to the Cloned Repository Directory:**
+Use the `cd` command to navigate into the cloned repository directory:  
+    ```
+    cd Password-generator
+    ```
+1. **Install Libraries from requirements.txt:**
+Use the `pip install -r` command to install the libraries listed in the requirements.txt file.
+    ```
+    pip install -r requirements.txt
+    ``` 
+    This command will install all the required libraries and dependencies specified in the requirements.txt file within your virtual environment.
+1. **Deactivate the Virtual Environment:**
+When you're done working in the virtual environment, you can deactivate it using the following command:
+    ```
+    deactivate
+    ```
+    This returns you to the global Python environment.
 ## Credits
 - [Lucidchart](https://www.lucidchart.com/pages/) for the generation of the Diagram
 - [Code institute](https://codeinstitute.net/) for providing the template used in this project
