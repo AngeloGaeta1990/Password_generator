@@ -4,14 +4,14 @@
 
 import csv
 import os
-from account import Account
-from password import Password
+from classes.account import Account
+from classes.password import Password
 
 PASSWORD_CHARACTERS = 10
 PASSWORD_NUMBERS = 2
 PASSWORD_SPECIAL_CHARACTERS = 2
 PASSWORD_UPPER_CASE_CHARACTERS = 2
-MAX_PASSWORD_CHARATERS = 100
+MAX_PASSWORD_CHARACTERS = 100
 ASCII_ART = """
                                                 ███████║███████╗███████╗██╗   ██║██████╗ ███████╗                            
                                                 ██╔════╝██╔════╝██╔════╝██║   ██║██╔══██╗██╔════╝                            
@@ -85,7 +85,7 @@ def get_account_data():
         print("Example: Netflix")
         service = input("Enter the name of the service here:\n")
         print("Please enter the username")
-        print("Example: my_email@provider.com")
+        print("Example: my_email@provider.com or SecureUser")
         username = input("Enter the username here:\n")
         print(f"You are a creating a password for {service} and your username"
               f"is {username}")
@@ -94,11 +94,11 @@ def get_account_data():
         while else_account_approval:
             approval = input(f"Are the service {service} and username"
                              f" {username} correct? (yes or no)\n").lower()
-            if approval == "yes":
+            if approval == "yes" or approval == "y":
                 account = Account(service, username)
                 else_account_approval = False
                 return account
-            elif approval == "no":
+            elif approval == "no" or approval == "n":
                 else_account_approval = False
             else:
                 print(f"You entered {approval} you should type yes or no")
@@ -189,10 +189,10 @@ def edit_password_default():
 def validate_new_password_settings(password_length_int, numbers_int,
                                    special_characters_int,
                                    upper_case_letters_int):
-    os.system('cls' if os.name == 'nt' else 'clear')
     """
     checks if the special characters + numbers < password length
     """
+    os.system('cls' if os.name == 'nt' else 'clear')
     total_characters = (numbers_int +
                         special_characters_int +
                         upper_case_letters_int)
@@ -202,9 +202,9 @@ def validate_new_password_settings(password_length_int, numbers_int,
         print(f"You have selected {numbers_int} numbers,"
               f"{special_characters_int} special characters and"
               f"{upper_case_letters_int} upper case letters\n")
-        print(f"resulting in a total of {total_characters} characthers\n")
+        print(f"resulting in a total of {total_characters} characters\n")
         print(f"this exceeds the desired password length of"
-              f"{password_length_int} characthers\n")
+              f"{password_length_int} characters\n")
         print("Please try again")
         return False
 
@@ -271,21 +271,24 @@ def create_password_file(account, filename="secure_passwords.csv"):
     account_list = [account_dict]
     file_exists = False
     try:
-        with open(filename, 'r') as csvfile:
-            existing_headers = next(csv.reader(csvfile))
+        with open(filename, 'r') as csv_file:
+            existing_headers = next(csv.reader(csv_file))
             if existing_headers == list(headers):
                 file_exists = True
                 file_writing_mode = 'a'
     except FileNotFoundError:
         file_writing_mode = 'w'
-    with open(filename, file_writing_mode, newline='') as csvfile:
-        csv_writer = csv.DictWriter(csvfile, fieldnames=headers)
+    with open(filename, file_writing_mode, newline='') as csv_file:
+        csv_writer = csv.DictWriter(csv_file, fieldnames=headers)
         if not file_exists:
             csv_writer.writeheader()
         csv_writer.writerows(account_list)
 
 
 def main():
+    """
+    Main function
+    """
     show_intro()
     account = get_account_data()
     password_info = get_password_info()

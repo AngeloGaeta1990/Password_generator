@@ -30,13 +30,13 @@ class Password(Mixin):
     def add_numbers_list(self):
         """
         generates a list of random numbers each value between 0 and 9
-        the lenght of the list is equal to self.numbers value
+        the length of the list is equal to self.numbers value
         """
         self.numbers_list = self.generate_random_numbers(self.numbers_length)
 
-    def add_special_charaters(self):
+    def add_special_characters(self):
         """
-        generates a list of random special characters the lenght of the list
+        generates a list of random special characters the length of the list
         is equal to self.special_characters value
         """
         self.special_characters_list = self.generate_random_special_characters(
@@ -44,7 +44,7 @@ class Password(Mixin):
 
     def add_upper_case_letters(self):
         """
-        generates a list of upper case letter  the lenght of the list is equal
+        generates a list of upper case letter  the length of the list is equal
         to upper_case_letters value
         """
         self.upper_case_list = self.generate_random_upper_case_letters(
@@ -52,7 +52,7 @@ class Password(Mixin):
 
     def add_lower_case_letters(self):
         """
-        generates a list of lower case letters the lenght of the list is equal
+        generates a list of lower case letters the length of the list is equal
         to
         self.length-(self.special_characters+self.numbers+self.upper_case_letters)
         """
@@ -104,18 +104,18 @@ class Password(Mixin):
                           f"in data breaches.")
             else:
                 print("Warning: Unable to connect to the API. I can not check"
-                      " if your password has alredy been exposed")
+                      " if your password has already been exposed")
         except requests.exceptions.RequestException as e:
             print(f"API request error: {e}")
 
     def builder(self):
         """
-        joins methods add_numbers_list(), add_special_charaters(),
+        joins methods add_numbers_list(), add_special_characters(),
         add_upper_case_letters(), add_lower_case_letters(),
         generate_password()
         """
         self.add_numbers_list()
-        self.add_special_charaters()
+        self.add_special_characters()
         self.add_upper_case_letters()
         self.add_lower_case_letters()
         self.generate_password()

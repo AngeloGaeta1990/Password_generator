@@ -3,11 +3,7 @@ from tabulate import tabulate
 
 class Account():
     """
-    Account class, service and username must be provided to the constructor
-    service = str() e.g. Netflix
-    username = str() e.g my_email@provider.com or user
-    password = str() eg. myp@ssw_rd
-    secure = str() e.g. Verified or Not verified
+    Account class contains service, username password and password verification
     """
 
     def __init__(self, service, username):
