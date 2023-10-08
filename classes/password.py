@@ -1,10 +1,14 @@
 import random
 import hashlib
 import requests
-from mixin import Mixin
+from .mixin import NumbersMixin
+from .mixin import SpecialCharactersMixin
+from .mixin import UpperCaseLettersMixin
+from .mixin import LowerCaseLettersMixin
 
 
-class Password(Mixin):
+class Password (NumbersMixin, SpecialCharactersMixin,
+                UpperCaseLettersMixin, LowerCaseLettersMixin):
     """
     Password class contains all the info required to build password
     """

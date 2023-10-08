@@ -6,22 +6,40 @@ class Mixin:
     """
     This class contain methods which can be used by all classes
     """
+
+
+class NumbersMixin(Mixin):
+    """
+    Mixin subclass for generating random numbers.
+    """
     def generate_random_numbers(self, amount):
         """
         generates a list of random numbers
         """
-        numbers = [random.randint(0,9) for n in range(amount)]
+        numbers = [random.randint(0, 9) for n in range(amount)]
         return numbers
-    
+
+
+class SpecialCharactersMixin(Mixin):
+    """
+    Mixin subclass for generating random special characters.
+    """
     def generate_random_special_characters(self, amount):
         """
         generates a list of special characters
         """
-        all_special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', 
-                                  '{', '}', ';', ':', '<', '>', ',', '.', '/', '?', '|', '\\', '`', '~']
+        all_special_characters = ['!', '@', '#', '$', '%', '^', '&', '*',
+                                  '(', ')', '-', '_', '=', '+', '[', ']',
+                                  '{', '}', ';', ':', '<', '>', ',', '.',
+                                  '/', '?', '|', '\\', '`', '~']
         special_characters = random.sample(all_special_characters, amount)
         return special_characters
-    
+
+
+class UpperCaseLettersMixin(Mixin):
+    """
+    Mixin subclass for generating random uppercase letters.
+    """
     def generate_random_upper_case_letters(self, amount):
         """
         generates a list of random uppercase letters
@@ -29,14 +47,16 @@ class Mixin:
         letters = string.ascii_uppercase
         random_letters = random.choices(letters, k=amount)
         return random_letters
-    
-    
+
+
+class LowerCaseLettersMixin(Mixin):
+    """
+    Mixin subclass for generating random lowercase letters.
+    """
     def generate_random_lower_case_letters(self, amount):
         """
         generates a list of random lowercase letters
         """
-        letters = string.ascii_lowercase  
+        letters = string.ascii_lowercase
         random_letters = random.choices(letters, k=amount)
         return random_letters
-
-        

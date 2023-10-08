@@ -119,10 +119,10 @@ def get_password_info():
     while no_confirmation:
         approval = input("Do you want to keep the default"
                          " settings? (yes/no)\n").lower()
-        if approval == "yes":
+        if approval == "yes" or approval == "y":
             no_confirmation = False
             password = Password()
-        elif approval == "no":
+        elif approval == "no" or approval == "n":
             password = edit_password_default()
             if password:
                 no_confirmation = False
@@ -225,10 +225,20 @@ def generate_password(password):
         user_decision = input("Do you want to keep this password? (yes/no)\n"
                               "(If 'no' a new password will be generated)"
                               "\n").lower()
-        if user_decision == "yes":
+        if user_decision == "yes" or user_decision == "y":
             user_like = True
+        elif user_decision == "no" or user_decision == "n":
+            pass
         else:
-            print(f"You entered {user_decision}, please enter yes or no")
+            while not (user_decision == "yes" or user_decision == "y" or
+                       user_decision == "no" or user_decision == "n"):
+                print(f"You entered {user_decision}, please enter yes or no")
+                user_decision = input("Do you want to keep this password?"
+                                      " (yes/no)\n"
+                                      " (If 'no' a new password"
+                                      " will be generated)"
+                                      "\n").lower()
+                print(user_decision)
     return password
 
 
