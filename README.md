@@ -4,12 +4,14 @@
 ----
 The "Secure Password Generator" is a robust tool designed to empower users with the capability to generate exceptionally strong and highly secure passwords, all while addressing the growing concerns around password security in an increasingly digital age.
 
-While services like LastPass and Google Passwords offer secure password storage, they inherently rely on online platforms, which can potentially be vulnerable to cyberattacks. The Secure Password Generator, on the other hand, provides an offline solution for users who prioritize ultimate security and control over their password creation process.
+While services like LastPass and Google Passwords offer secure password storage, they inherently rely on online platforms, which can potentially be vulnerable to cyber attacks. The Secure Password Generator, on the other hand, provides an offline solution for users who prioritize ultimate security and control over their password creation process.
 
 Live link to [Secure Password Generator](https://secure-password-generator-618a9b17c80c.herokuapp.com/)
 
 
-![Secure Password Generator first prompt](/media/first_prompt.png)
+![Secure Password Generator logo ASCII art](/media/logo_ascii_art.png)
+![Secure Password Generator lock ASCII art](/media/lock_ascii_art.png)
+
 
 
 ## Table of Contents
@@ -28,6 +30,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
    - [Classes](#classes)
    - [Libraries](#libraries)
 - [Testing](#testing)
+- [Bugs fixing](#bugs-fixing)
 - [Deployment](#deployment)
    - [Heroku](#heroku)
    - [Local](#local)
@@ -58,20 +61,31 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
 ## Features
 ### How to Generate a password
+1. ### First Screen
+    At first, the user can see the *Secure Password Generator* ASCII art logo.
+    ![Secure Password Generator logo ASCII art](/media/logo_ascii_art.png)  
+    ![Secure Password Generator lock ASCII art](/media/lock_ascii_art.png)  
+    Then, they are prompted to type `I` or `i` to see the instructions 
+
+    ![Instructions part1](/media/instructions_part_1.png)  
+    ![Instructions part2](/media/instructions_part_2.png)  
+    
+    or press `Enter`to start generating a password.
+    
 
 1. ### Enter Account and Username
    The user begins by entering their account name and username. These fields can accept strings of any length and type without verification.
    ![Account and Username Prompt](/media/user_and_account.png)  
 
-2. ### Verify Input:
-   The tool asks the user to verify that the entered information is correct. The user's response is converted to lowercase, so `YES`, `Yes`, and `yes` are all accepted.
+1. ### Verify Input:
+   The tool asks the user to verify that the entered information is correct. The user's response is converted to lowercase, so `YES`, `Yes`, `yes` and `y` are all accepted.
 
    ![Verification](/media/user_and_account_verification.png)
 
    If the answer is anything other than `yes`, the user is prompted to re-enter the service and username. If the response is neither `yes` nor `no`, the algorithm informs the user of the incorrect option, displays the options inserted, and asks for a username and service re-entry.
    If the answer is `no`, no error message is displayed, but the tool prompts the user to re-enter the service and username.
 
-3. ### Generate Password with Default Settings:
+1. ### Generate Password with Default Settings:
 
      If the user's response is `yes`, the tool asks if the user wants to generate a password with default settings:
 
@@ -85,7 +99,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
      - If the user selects "yes" again, the algorithm generates a password with the default settings.
      - The user can choose whether to keep this password. If they answer "yes," the algorithm proceeds to the next steps. If they answer "no," a new password is generated with the same default settings.
 
-4. ### Edit Default Settings:
+1. ### Edit Default Settings:
 
    If the user decides not to keep the default settings, they can edit the following parameters:
 
@@ -97,14 +111,14 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
     ![Edit default settings](/media/change_default_settings.png)  
 
-  - Even in this case, the user can choose whether to keep the edited password settings.
-  - When settings are edited, the algorithm checks that the sum of special characters, numbers, and uppercase letters does not exceed the total character count.
-  - The lowercase characters to add are calculated as follows: `total characters - (special characters + numbers + uppercase letters)`
-  - If the condition `special characters + numbers + uppercase letters <= total characters` is not met, an error is prompted, showing the user the input values and the reason for the error.
+    - Even in this case, the user can choose whether to keep the edited password settings.
+    - When settings are edited, the algorithm checks that the sum of special characters, numbers, and uppercase letters does not exceed the total character count.
+    - The lowercase characters to add are calculated as follows: `total characters - (special characters + numbers + uppercase letters)`
+    - If the condition `special characters + numbers + uppercase letters <= total characters` is not met, an error is prompted, showing the user the input values and the reason for the error.
 
     ![Invalid custom settings](/media/invalid_custom_settings.png)
 
-5. ### Password Security Check: 
+1. ### Password Security Check: 
     If the user decides to keep the password, the algorithm queries the Pwned API. It generates a hash code containing only the first 5 characters of the password and searches the API results for a matching prefix.
 
     - If the suffix of the password appears in the API results, a message indicating that the password has been breached is displayed.
@@ -114,13 +128,18 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
     ![Secure password](/media/secure_password_generated.png)
 
-6. ### Save Password Information
+1. ### Save Password Information
 
     Finally, the service, username, password, and password validation are saved to a .csv file named "secure_password.csv." If the file doesn't exist, a new one is created. If "secure_password.csv" already exists, a new line is added to the file.
 
     ![secure_password.csv](/media/secure_password_csv.png)
 
     - Note that the file may not be accessible via a live link due to the deployment on Heroku. Users who clone the repository on their device will be able to view and manipulate the file.
+
+1. ### Print Account Information
+    The algorithm also prints the service, username, password, and password validation in a table format on the terminal.
+    In this way even if the repo is not deployed on local the user can still see the info in a clear way then copy paste them in a safe location
+    ![Terminal output](/media/terminal_output.png)
 
 
 ## Key Features and Benefits:
@@ -197,21 +216,26 @@ Represents a password and its generation parameters.
 ### Mixin Class
 
 A mixin class with common methods that can be applied to other classes.
+It contains a different subclass for each function:
+- **NumbersMixin**: Generates a list of random numbers
+- **SpecialCharactersMixin**: Generates a list of random special characters
+- **UpperCaseLettersMixin**: Generates a list of random upper case letters
+- **LowerCaseLettersMixin**: Generates a list of random lower case letters
 
-**Methods:**
-
-- `common_method()`: A common method that can be used by other classes.
- 
 ## Libraries
 - **csv**: Utilized for creating the output file secure_passwords.csv, which contains information such as service name, username, password, and password security verification.
 
-- **random**: Employed to generate a random list of both upper and lower case characters, numbers, and special characters.
-
 - **hashlib**: Utilized to convert passwords into hash codes, enhancing security.
+
+- **os**: Used to obtain the terminal length and properly center the output
+
+- **random**: Employed to generate a random list of both upper and lower case characters, numbers, and special characters.
 
 - **requests**: Used for making HTTP requests, especially to access the PWNED API for checking password breaches.
 
 - **string**: Utilized to generate random strings composed of letters, often used for generating random passwords.
+
+- **tabulate**:  Used to print the account, username, password, and password verification in the terminal in a table format
 
 ## Testing
 ---
