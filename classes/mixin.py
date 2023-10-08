@@ -32,7 +32,7 @@ class SpecialCharactersMixin(Mixin):
                                   '(', ')', '-', '_', '=', '+', '[', ']',
                                   '{', '}', ';', ':', '<', '>', ',', '.',
                                   '/', '?', '|', '\\', '`', '~']
-        special_characters = random.sample(all_special_characters, amount)
+        special_characters = random.choices(all_special_characters, k=amount)
         return special_characters
 
 

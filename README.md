@@ -239,38 +239,108 @@ It contains a different subclass for each function:
 
 ## Testing
 ---
+1. **Prompt**: Press I for instructions, or press Enter to start  
+    **Tests**: 
+    - Letters different from `I` or `i`, numbers, and special characters did not trigger any action until the `Enter` key was pressed.
+    - When `I` or `i` was entered and followed by the `Enter` key, the instructions were printed.
+1. **Prompt**: Follow the steps in the Terminal to generate the password press Enter to continue.  
+    **Tests**:
+    - Different letters, numbers, and special characters were tested, and the next prompt was triggered only when the `Enter` key was pressed.
+1. **Prompt**: Enter the name of the service here: and Enter the name of the service here:
+   **Tests**:
+   - Tested with numbers, special characters, and spaces, and it returned the expected behavior.
+1. **Prompt**: Are the service s and username s correct? (yes or no)  
+   **Tests**:
+   - Special characters, spaces, and numbers caused the repetition of the prompt.
+   - The next prompt was triggered only by `y`, `Y`, `YES`, `Yes`, and `yes`.
+   - `n`, `N`, `NO`, `No`, and `no` triggered re-entering of the account and username.
+1. **Prompt**: Do you want to keep the default settings? (yes/no)  
+   **Tests**:
+   - Special characters, spaces, and numbers caused the repetition of the prompt.
+   - `y`, `Y`, `YES`, `Yes`, and `yes` triggered the generation of a password.
+   - `n`, `N`, `NO`, `No`, and `no` triggered editing of default settings  
+1. **Prompt**: How many total characters do you want in your password?  
+   **Tests**:
+   - Set the total characters to `5000` and the number of special characters, numbers, and uppercase letters to `34`. This resulted in validation failure because `34 * 3 = 102`, and `102 > 100`.
+   - Set  the total characters, the number of special characters, numbers, and uppercase letters to `0` resulted in empty string password
+   - Set the total characters to `100` and the number of special characters, numbers, and uppercase letters to `25`, password generated as regular
+
 ## Bugs fixing
 ---
-1. **Issue**: When the user enters an incorrect setting for "How many total characters?", the program proceeds to the next question.
+1. **Issue**: When the user enters an incorrect setting for "How many total characters?", the program proceeds to the next question.  
 **Solution**: Added a break statement at the end of each try block to prevent moving forward on incorrect input.
-2. **Issue**: Incorrect wording in "Please enter the service you need the password for."
+1. **Issue**: Incorrect wording in "Please enter the service you need the password for."  
 **Solution**: Clarified and corrected the wording for better user understanding.
-3. **Issue**: Inaccurate message: "You selected 8 numbers and 8 special characters. 8 numbers + 8 special characters are 16 total characters. 16 total characters are longer than the desired password length of 1."
+1. **Issue**: Inaccurate message: "You selected 8 numbers and 8 special characters. 8 numbers + 8 special characters are 16 total characters. 16 total characters are longer than the desired password length of 1."  
 **Solution**: Revised to: "You have chosen 8 numbers and 8 special characters, resulting in a total of 16 characters. This exceeds the specified password length of 1 character."
-4. **Issue**: An infinite loop occurs when the user modifies password settings.
-**Solution**:  Implemented a condition in the `get_password_info()` function that terminates the while loop once a password is generated.
-5. **Issue**: Calling `Mixin.generate_random_numbers()` resulted in a TypeError: "Mixin.generate_random_numbers() takes 1 positional argument, but 2 were given."
-**Solution**: Updated the method signature to include self as the first argument: `def generate_random_numbers(self, amount)`.
-6. **Issue**: function `Mixin.generate_random_special_characters()` returns a boolean instead of a list of characters.
+1. **Issue**: An infinite loop occurs when the user modifies password settings.  
+**Solution**:  Implemented a condition in the `get_password_info()` function that terminates the while loop once a password is generated.  
+1. **Issue**: Calling `Mixin.generate_random_numbers()` resulted in a TypeError: "Mixin.generate_random_numbers() takes 1 positional argument, but 2 were given."  
+**Solution**: Updated the method signature to include self as the first argument: `def generate_random_numbers(self, amount)`.  
+1. **Issue**: function `Mixin.generate_random_special_characters()` returns a boolean instead of a list of characters.  
 **Solution**: Replaced list comprehension with random.sample to correctly generate special characters.
-7. **Issue**: Lack of differentiation between lowercase and uppercase letters in generated passwords.
+1. **Issue**: Lack of differentiation between lowercase and uppercase letters in generated passwords.  
  **Solution**: Added support for uppercase letters in password customization alongside special characters and numbers.
-8. **Issue**:  Special characters were mistakenly receiving the input intended for the number of characters instead of the correct input.
+1. **Issue**:  Special characters were mistakenly receiving the input intended for the number of characters instead of the correct input.  
 **Solution**:  Reassigned the variable to correctly accept the input intended for special characters.
-9. **Issue**: An error occurred when attempting to call the account_dict() class method:`account_dict()` class method:
+1. **Issue**: An error occurred when attempting to call the account_dict() class method:`account_dict()` class method:  
     ```
     account_dict = account.account_dict()
                     ^^^^^^^^^^^^^^^^^^^^
     AttributeError: 'function' object has no attribute 'account_dict'
     ```
    The error resulted from mistakenly treating `account_dict` as a variable rather than invoking it as a function, which should be done as `account.account_dict()`.
-**Solution**: Corrected the usage by invoking the function as `account.account_dict()`.
-10. **Issue**: When deploying on Heroku, the following error occurred: "module not found."
+**Solution**: Corrected the usage by invoking the function as `account.account_dict()`.  
+1. **Issue**: When deploying on Heroku, the following error occurred: "module not found."  
 **Solution**: To resolve this, the 'requirements.txt' file was updated to include the necessary dependencies.
-11. **Issue**: There was a mention of 'secure_passwords.csv' in GitHub, which was caused by a typo in the filename when added to the .gitignore file.
+1. **Issue**: There was a mention of 'secure_passwords.csv' in GitHub, which was caused by a typo in the filename when added to the .gitignore file.  
 **Solution**:  Corrected the filename typo within the .gitignore file to prevent any reference to 'secure_passwords.csv' on GitHub.
-12. **Issue**: Password generation even if invalid settings are provided. e.g. the total length of the password is < numers amount + special characters amount + upper case amount
+1. **Issue**: Password generation even if invalid settings are provided. e.g. the total length of the password is < numbers amount + special characters amount + upper case amount  
 **Solution**: Moved the password generation outside the while loop in function `edit_password_default()` to ensure it is generated only when the validation criteria are met.
+1. **Issue**: When the function `self.account_dict` was called within the function `print_account`, the following error was returned:
+
+    ```
+    Error:
+        table = tabulate(table_data.items(), headers=["Field", "Value"], tablefmt="grid")
+                            ^^^^^^^^^^^^^^^^
+        AttributeError: 'function' object has no attribute 'items'
+    ```  
+    **Solution**: The function was called as an attribute rather than as a function.
+    To resolve the issue, replace `self.account_dict` with `self.account_dict()`.
+
+1. **Issue**: After adding the tabulate module to the requirements.txt file and deploying the            application on Heroku, the following error occurred: 
+    ```
+    ModuleNotFoundError: No module named 'tabulate'
+    ```  
+    **Solution**: The issue was caused by activating a virtual environment using Conda, which resulted in a local path being added to requirements.txt. To resolve the issue, create a separate virtual environment using Python instead of Conda. This will ensure that the dependencies are properly listed in requirements.txt and can be installed by Heroku during deployment without issues.  
+1. **Issue**: The following error was returned by the function `edit_password_default` when user input did not meet the criteria to generate a password, for example, when the number of characters exceeds the total password length:
+    ```
+            Error:
+            UnboundLocalError: cannot access local variable 'password_length_int' where it is not associated with a value
+            when assigning letter to password length
+
+    ```  
+    **Solution**: In the `edit_password_default function`, the `password` variable is defined outside the `while` loop, which means the variable is generated even if validation criteria are not met. To resolve the issue, add an `if` statement to generate a password only if the validation criteria are met. This ensures that the `password` variable is only assigned a value when the criteria are satisfied.
+1. **Issue**: Prints on terminal were separated by too much space.    
+**Solution**: The issue was caused by using a backslash \ to separate long strings, resulting in extra space. To resolve the issue, you can either use a new f"" string or close and start a new string to avoid extra spaces, for example: 
+    ```
+    print("My very"
+            " long string") 
+    ```  
+1. **Issue**: There was an infinite loop in the `generate_password function`. A while loop was used within the `else` statement to wait until the user's answer was either `yes` or `no` before generating or using a password. However, even if the user entered `yes` or `no`, the loop continued to repeat.
+**Solution**: Replace the following condition:
+    ```
+    while (user_decision != "yes" or user_decision != "y" or
+                       user_decision != "no" or user_decision != "n"):
+    ```
+    With this condition:
+    ```
+    while not (user_decision == "yes" or user_decision == "y" or
+                       user_decision == "no" or user_decision == "n"):
+    ```  
+    The corrected condition ensures that the loop will exit when the user enters "yes," "y," "no," or "n," resolving the issue of the infinite loop.
+1. **Issue**: Passwords were always showing as not verified.  
+**Solution**: During the restyling of the code to meet flake8 rules, a mistake was made, and `not password.secure` was added in the `update_account` function instead of just using `password.secure`. To resolve the issue, remove the `not` keyword.
 
 ## Deployment
 ---

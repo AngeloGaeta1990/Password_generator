@@ -148,7 +148,7 @@ def edit_password_default():
         try:
             password_length = input(("How many total characters do you want"
                                      " in your password?"
-                                     " (enter a number e.g.10\n)"
+                                     " (enter a number e.g.10)\n"
                                      " A maximum of 100 characters is allowed."
                                      " if your value is >100, a password of"
                                      " 100 characters characters will be"
@@ -158,8 +158,8 @@ def edit_password_default():
                                    100 else password_length_int)
         except ValueError:
             print(f"You entered {password_length},"
-                  f"you should enter an integer number e.g. 10\n"
-                  f"Let's try again.")
+                  f" you should enter an integer number e.g. 10\n"
+                  f" Let's try again.")
             break
         try:
             numbers_length = input(("How many numbers do you want in your"
@@ -167,8 +167,8 @@ def edit_password_default():
             numbers_int = int(numbers_length)
         except ValueError:
             print(f"You entered {numbers_length},"
-                  f"you should enter an integer number"
-                  f"e.g. 10\nLet's try again.")
+                  f" you should enter an integer number"
+                  f" e.g. 10\nLet's try again.")
             break
         try:
             special_characters_length = input(("How many special characters"
@@ -177,8 +177,8 @@ def edit_password_default():
             special_characters_int = int(special_characters_length)
         except ValueError:
             print(f"You entered {special_characters_length},"
-                  f"you should enter an integer number e.g. 10\n"
-                  f"Let's try again.")
+                  f" you should enter an integer number e.g. 10\n"
+                  f" Let's try again.")
             break
         try:
             upper_case_length = input(("How many upper case letters"
@@ -187,15 +187,15 @@ def edit_password_default():
             upper_case_letters_int = int(upper_case_length)
         except ValueError:
             print(f"You entered {upper_case_length},"
-                  f"you should enter a number e.g. 10\nLet's try again.")
+                  f" you should enter a number e.g. 10\nLet's try again.")
             break
         validation = validate_new_password_settings(password_length_int,
                                                     numbers_int,
                                                     special_characters_int,
                                                     upper_case_letters_int)
-    if validation:
         password = Password(password_length_int, numbers_int,
-                            special_characters_int, upper_case_letters_int)
+                            special_characters_int,
+                            upper_case_letters_int) if validation else None
         return password
 
 
@@ -212,12 +212,12 @@ def validate_new_password_settings(password_length_int, numbers_int,
     if (total_characters <= password_length_int):
         return True
     else:
-        print(f"You have selected {numbers_int} numbers,"
-              f"{special_characters_int} special characters and"
-              f"{upper_case_letters_int} upper case letters\n")
-        print(f"resulting in a total of {total_characters} characters\n")
-        print(f"this exceeds the desired password length of"
-              f"{password_length_int} characters\n")
+        print(f"You have selected {numbers_int} numbers, "
+              f" {special_characters_int} special characters and "
+              f" {upper_case_letters_int} upper case letters\n")
+        print(f" resulting in a total of {total_characters} characters\n")
+        print(f" this exceeds the desired password length of "
+              f" {password_length_int} characters\n")
         print("Please try again")
         return False
 
