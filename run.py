@@ -140,9 +140,14 @@ def edit_password_default():
         try:
             password_length = input(("How many total characters do you want"
                                      " in your password?"
-                                     " (enter a number e.g.10)"
-                                     "\n"))
+                                     " (enter a number e.g.10\n)"
+                                     " A maximum of 100 characters is allowed."
+                                     " if your value is >100, a password of"
+                                     " 100 characters characters will be"
+                                     " generated\n"))
             password_length_int = int(password_length)
+            password_length_int = (100 if password_length_int >
+                                   100 else password_length_int)
         except ValueError:
             print(f"You entered {password_length},"
                   f"you should enter an integer number e.g. 10\n"
@@ -233,12 +238,12 @@ def generate_password(password):
             while not (user_decision == "yes" or user_decision == "y" or
                        user_decision == "no" or user_decision == "n"):
                 print(f"You entered {user_decision}, please enter yes or no")
-                user_decision = input("Do you want to keep this password?"
-                                      " (yes/no)\n"
-                                      " (If 'no' a new password"
-                                      " will be generated)"
-                                      "\n").lower()
-                print(user_decision)
+                user_decision = input(f"Do you want to keep the password"
+                                      f"{password.pwd}?"
+                                      f" (yes/no)\n"
+                                      f" (If 'no' a new password"
+                                      f" will be generated)"
+                                      f"\n").lower()
     return password
 
 
@@ -256,19 +261,20 @@ def update_account(account, password):
     Adds password and secure info to account instance
     """
     account.password = password.pwd
-    if not password.secure:
+    if password.secure:
         account.secure = "Verified"
     return account
 
 
 def show_output_in_terminal(account):
-    os.system('cls' if os.name == 'nt' else 'clear')
     """
     Print account info on the terminal
     """
     print(f"The data for the {account.service} account are below ")
     print(account.print_account())
     print("Please store this data in a secure and confidential location.")
+    input("Press Enter to generate a password for a new Account\n")
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def create_password_file(account, filename="secure_passwords.csv"):
@@ -299,14 +305,15 @@ def main():
     """
     Main function
     """
-    show_intro()
-    account = get_account_data()
-    password_info = get_password_info()
-    password = generate_password(password_info)
-    password_api = api_verification(password)
-    updated_account = update_account(account, password_api)
-    show_output_in_terminal(updated_account)
-    create_password_file(updated_account)
+    while True:
+        show_intro()
+        account = get_account_data()
+        password_info = get_password_info()
+        password = generate_password(password_info)
+        password_api = api_verification(password)
+        updated_account = update_account(account, password_api)
+        show_output_in_terminal(updated_account)
+        create_password_file(updated_account)
 
 
 main()
