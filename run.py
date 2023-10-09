@@ -34,7 +34,7 @@ def show_intro():
     """
     Show ASCII art and tool instructions and centers them
     """
-
+    os.system('cls' if os.name == 'nt' else 'clear')
     # ASCII_ART
     print(ASCII_ART)
     # Tool instructions

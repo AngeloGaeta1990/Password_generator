@@ -74,19 +74,18 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
     At first, the user can see the *Secure Password Generator* ASCII art logo.
     ![Secure Password Generator logo ASCII art](/media/logo_ascii_art.png)  
-    ![Secure Password Generator lock ASCII art](/media/lock_ascii_art.png)  
     Then, the algorithm prompts the user to type I or i to see the instructions
 
     ![Instructions part1](/media/instructions_part_1.png)  
     ![Instructions part2](/media/instructions_part_2.png)  
     or to press `Enter`to start generating a password.
 
-1. ### Enter Account and Username
+2. ### Enter Account and Username
 
    The user has to enter their account name and username. These fields can accept strings of any length and type without verification.
    ![Account and Username Prompt](/media/user_and_account.png)  
 
-1. ### Verify Input
+3. ### Verify Input
 
    The tool asks the user to verify that the entered information is correct. It converts the user response to lowercase, so `YES`, `Yes`, `yes` and `y` are all accepted.
 
@@ -95,7 +94,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
    If the answer is anything other than `yes`, the user is prompted to re-enter the service and username. If the response is neither `yes` nor `no`, the algorithm informs the user of the incorrect option, displays the options inserted, and asks for a username and service re-entry.
    If the answer is `no`, no error message is displayed, but the tool prompts the user to re-enter the service and username.
 
-1. ### Generate Password with Default Settings
+4. ### Generate Password with Default Settings
 
      If the user's response is `yes`, the tool asks if the user wants to generate a password with default settings:
 
@@ -109,7 +108,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
      - If the user selects "yes" again, the algorithm generates a password with the default settings.
      - The user can choose whether to keep this password. If they answer "yes," the algorithm proceeds to the next steps. If they answer "no," a new password is generated with the same default settings.
 
-1. ### Edit Default Settings
+5. ### Edit Default Settings
 
    If the user decides not to keep the default settings, they can edit the following parameters:
 
@@ -127,7 +126,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
     ![Invalid custom settings](/media/invalid_custom_settings.png)
 
-1. ### Password Security Check
+6. ### Password Security Check
 
     If the user decides to keep the password, the algorithm queries the Pwned API. It generates a hash code containing only the first five characters of the password and searches the API results for a matching prefix.
 
@@ -137,7 +136,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
     ![Secure password](/media/secure_password_generated.png)
 
-1. ### Save Password Information
+7. ### Save Password Information
 
     Finally, the algorithm saves service, username, password, and password validation in a .csv file named "secure_password.csv." If the file doesn't exist, it creates a new one. If "secure_password.csv" already exists,  it adds a new line to the file.
 
@@ -145,7 +144,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
     - Note that the file may not be accessible via a live link due to the deployment on Heroku. Users who clone the repository on their device can view and manipulate the file.
 
-1. ### Print Account Information
+8. ### Print Account Information
 
     The algorithm also prints the service, username, password, and password validation in a table format on the terminal.
     In this manner, even if the user does not deploy locally, he can still view the information clearly and copy-paste it to a secure location.
@@ -525,4 +524,3 @@ To activate the virtual environment, use the appropriate command based on your o
 - [Chatgpt](https://openai.com/blog/chatgpt) for assisting in troubleshooting and proofreading
 - [PWNED](https://haveibeenpwned.com/) for providing the API method to verify if a password is secure.
 - Great thanks to [David Bowers](https://github.com/dnlbowers) for assisting in shaping the project and providing the motivation to move forward.
-- test
