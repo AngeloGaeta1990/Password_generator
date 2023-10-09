@@ -17,24 +17,28 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 ## Table of Contents
 ---
 - [Secure Password Generator](#secure-password-generator)
-    - [Site Overview](#site-overview)
-- [Planning Phase](#planning-phase)
-    - [Target audience](#target-audience)
-    - [Aims](#aims)
+  - [Site Overview:](#site-overview)
+  - [Table of Contents](#table-of-contents)
+  - [Planning Phase](#planning-phase)
+    - [Target Audience](#target-audience)
+    - [Aim](#aim)
     - [Flow chart](#flow-chart)
-- [Features](#features)
+  - [Features](#features)
     - [How to Generate a password](#how-to-generate-a-password)
-    - [Key Features and Benefits](#key-features-and-benefits)
-- [Future Enhancements](#future-enhancements)
-- [Data Model](#data-model)
-   - [Classes](#classes)
-   - [Libraries](#libraries)
-- [Testing](#testing)
-- [Bugs fixing](#bugs-fixing)
-- [Deployment](#deployment)
-   - [Heroku](#heroku)
-   - [Local](#local)
-- [Credits](#credits)
+  - [Key Features and Benefits:](#key-features-and-benefits)
+  - [Future-Enhancements](#future-enhancements)
+  - [Data model](#data-model)
+    - [Classes](#classes)
+    - [Account Class](#account-class)
+    - [Password Class](#password-class)
+    - [Mixin Class](#mixin-class)
+  - [Libraries](#libraries)
+  - [Testing](#testing)
+  - [Bugs fixing](#bugs-fixing)
+  - [Deployment](#deployment)
+    - [Heroku](#heroku)
+    - [Local](#local)
+  - [Credits](#credits)
 
     
        
@@ -273,7 +277,7 @@ It contains a different subclass for each function:
      - Special characters, spaces, and numbers caused the repetition of the prompt.
      -  `n`, `N`, `NO`, `No`, and `no` triggered editing of default settings and a new password generation.
      - `y`, `Y`, `YES`, `Yes`, and `yes` prompted API verification.
-1.  **Prompt**: Press Enter to generate a password for a new Account
+1.  **Prompt**: Press Enter to generate a password for a new Account  
      **Test**:
      - Special characters, spaces, and numbers did not trigger any new prompts.
      - Pressing Enter caused the algorithm to restart as expected.
@@ -363,62 +367,46 @@ It contains a different subclass for each function:
 ## Deployment
 ---
 ### Heroku
-The deployment has been performed on heroku as follows:
+The deployment has been performed on Heroku as follows:
 
 1. **Create a Heroku Account:**
     If you don't have a Heroku account, sign up for one at Heroku's website.
-
-2. **Log In to Heroku:**
+1. **Log In to Heroku:**
 Log in to your Heroku account using your credentials.
-
-3. **Access Heroku Dashboard:**
-After logging in, you'll be directed to your Heroku dashboard.
-
-4. **Create a New App:**
+1. **Access Heroku Dashboard:**
+After logging in,  the website will direct you to your Heroku dashboard.
+1. **Create a New App:**
 To deploy your GitHub repository on Heroku, click the "New" button on the top right corner of the dashboard and select "Create new app."
-
-5. **Name Your App:**
-Choose a unique name for your app. If you have a specific name in mind, enter it in the "App name" field. Otherwise, Heroku will suggest a name for you.
-
-6. **Choose a Region:**
-Select the region closest to your intended audience or location. This determines the data center where your app will be hosted. Click the "Create app" button when you're ready.
-
-7. **Connect to GitHub:**
+1. **Name Your App:**
+Choose a unique name for your app. If you have a specific one in mind, enter it in the "App name" field. Otherwise, Heroku will suggest a name for you.
+1. **Choose a Region:**
+Select the region closest to your intended audience or location. The latter determines the data centre where to host your app. Click the "Create app" button when you're ready.
+1. **Connect to GitHub:**
 In your app's dashboard, go to the "Deploy" tab. In the "Deployment method" section, choose "GitHub."
-
-8. **Add Config Vars:**
+1. **Add Config Vars:**
 On the "Deploy tab", navigate to the "Settings" tab.
 Scroll down to the "Config Vars" section and click the "Reveal Config Vars" button, then add a new configuration variable by entering "port" as the key and "8000" as the value, then click "Add."
-
-9. **Buildpacks**
-On the "settings" tab scroll down to the "Buildpacks" section and click the "Add buildpack" button.
+1. **Buildpacks**
+On the "Settings" tab, scroll down to the "Buildpacks" section and click the "Add buildpack" button.
 Select "Python" as the buildpack and save your changes.
-Repeat this step and this time add "node.js" as the buildpack instead of Python.
-
-10. **Buildpacks verification**
-Ensure that the buildpacks are in the correct order. If "node.js" is listed first, you can drag "Python" upwards to make it the first buildpack in the list.
-
-11. **Authorize Heroku to Access GitHub:**
-On the "Deploy tab" Click the "Connect to GitHub" button. Heroku will ask for permission to access your GitHub repositories. Authorize Heroku to access your GitHub account.
-
-12. **Search for Your GitHub Repository:**
-After authorization, you can search for your GitHub repository by entering its name in the search box. Once you find it, click the "Connect" button next to your repository.
-
-13. **Set Up Automatic or Manual Deployment:**
+Repeat this step and add "node.js" as the "buildpack" instead of Python.
+1. **Buildpacks verification**
+Ensure that the "buildpacks" are in the correct order. If "node.js" is listed first, you can drag "Python" upwards to make it the first "buildpack" in the list.
+1. **Authorize Heroku to Access GitHub:**
+On the "Deploy tab", click the "Connect to GitHub" button. Heroku will ask for permission to access your GitHub repositories. Authorize Heroku to access your GitHub account.
+1. **Search for Your GitHub Repository:**
+After authorization, you can search for your GitHub repository by entering its name in the search box. Once you find it, click the "Connect" button (next to your Github repo).
+1. **Set Up Automatic or Manual Deployment:**
 Heroku provides two deployment options:
-
- - **Automatic Deploys:** Whenever you push changes to your GitHub repository, Heroku will automatically deploy the latest version.
- - **Manual Deploy:** You can manually choose a branch to deploy. This is useful for controlling when updates go live.
-14. **Choose Your Deployment Branch**:
+    - **Automatic Deploys:** Heroku will deploy the latest version automatically whenever you push changes to your GitHub repository.
+    - **Manual Deploy:** You can manually choose a branch to deploy. The latter helps in controlling when updates go live.
+1. **Choose Your Deployment Branch**:
 If you selected manual deployment, choose the branch you want to deploy from the dropdown menu.
-
-15. **Deploy Branch:**
+1. **Deploy Branch:**
 Click the "Deploy Branch" button (for manual deployment) or "Enable Automatic Deploys" (for automatic deployment). Heroku will initiate the deployment process, which may take a few minutes.
-
-16. **View Deployment Logs:**
+1. **View Deployment Logs:**
 You can monitor the deployment process by clicking the "View" button in the "Build log" section.
-
-17. **Access Your Deployed App:**
+1. **Access Your Deployed App:**
 Once the deployment is successful, you can access your deployed app by clicking the "Open app" button at the top of the page.
 
 ### Local
@@ -427,7 +415,6 @@ To have this repository on your local machine, follow these steps:"
 
 1. **Open a Terminal (or Command Prompt)**:
 On your local machine, open a terminal or command prompt. You'll use this to enter commands.
-
 1. **Navigate to Your Desired Directory:**
 Use the `cd` (change directory) command to navigate to the directory where you want to create the virtual environment and clone the GitHub repository. For example:
     ```
@@ -439,49 +426,45 @@ Use the following command to create a virtual environment.
     python -m venv pwd_generator
     ```
     This command will create a virtual environment named `pwd_generator` in the current directory.
-
 1. **Activate the Virtual Environment:**
 To activate the virtual environment, use the appropriate command based on your operating system:
-- On Windows:
-    ```
-    pwd_generator\Scripts\activate
-    ```
-- On macOS and Linux
-    ```
-    source pwd_generator/bin/activate
-    ```
-  You'll see the virtual environment name in your command prompt, indicating that it's active. 
-
-5. **Install Git** (if not already installed):
-If Git is not installed on your system, you can download and install it from the official Git website: https://git-scm.com/downloads  
-
+    - On Windows:
+        ```
+        pwd_generator\Scripts\activate
+        ```
+    - On macOS and Linux
+        ```
+        source pwd_generator/bin/activate
+        ```
+    
+1. **Install Git** (if not already installed):
+    If you did not install Git on your system,  you can download and install it from the official Git website: https://git-scm.com/downloads  
 1. **Clone the GitHub Repository:**
-Use the git clone command to clone the GitHub repository. 
+    Use the git clone command to clone the GitHub repository. 
     ```
     git clone https://github.com/AngeloGaeta1990/Password_generator.git
     ```
    This command will download the repository files to your current directory.
-
 1. **Navigate to the Cloned Repository Directory:**
-Use the `cd` command to navigate into the cloned repository directory:  
+    Use the `cd` command to navigate into the cloned repository directory:  
     ```
     cd Password-generator
     ```
 1. **Install Libraries from requirements.txt:**
-Use the `pip install -r` command to install the libraries listed in the requirements.txt file.
+    Use the `pip install -r` command to install the libraries listed in the requirements.txt file.
     ```
     pip install -r requirements.txt
     ``` 
     This command will install all the required libraries and dependencies specified in the requirements.txt file within your virtual environment.
 1. **Deactivate the Virtual Environment:**
-When you're done working in the virtual environment, you can deactivate it using the following command:
+    When you want to stop the virtual environment, you can deactivate it using the following command:
     ```
     deactivate
     ```
-    This returns you to the global Python environment.
+    The latter will bring you back to the global Python environment.
 ## Credits
 - [Lucidchart](https://www.lucidchart.com/pages/) for the generation of the Diagram
 - [Code institute](https://codeinstitute.net/) for providing the template used in this project
 - [Chatgpt](https://openai.com/blog/chatgpt) for assisting in troubleshooting and proofreading
-- [PWNED](https://haveibeenpwned.com/) for providing the API method to verify if a password has been used in data breaches
+- [PWNED](https://haveibeenpwned.com/) for providing the API method to verify if a password is secure.
 - Great thanks to [David Bowers](https://github.com/dnlbowers) for assisting in shaping the project and providing the motivation to move forward. 
