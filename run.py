@@ -31,19 +31,6 @@ ASCII_ART = r"""
 ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║   ██║   ██║   ██║██╔══██╗
 ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║   ██║   ╚██████╔╝██║  ██║
  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
-                            .--------.
-                           / .------. \
-                          / /        \ \
-                          | |        | |
-                         _| |________| |_
-                       .' |_|        |_| '.
-                       '._____ ____ _____.'
-                       |     .'____'.     |
-                       '.__.'.'    '.'.__.'
-                       '.__  |      |  __.'
-                       |   '.'.____.'.'   |
-                       '.____'.____.'____.'
-                       '.________________.'
 """
 
 
@@ -51,13 +38,13 @@ def show_intro():
     """
     Show ASCII art and tool instructions and centers them
     """
-    terminal_width = os.get_terminal_size().columns
     # ASCII_ART
     print(ASCII_ART)
     # Tool instructions
     prompt_instructions = "Press I for instructions, or press Enter to start"
     start_tool = (input(prompt_instructions + "\n"))
     start_tool = start_tool.lower()
+    prompt_continue = "press Enter to continue"
     if start_tool == "i":
         os.system('cls' if os.name == 'nt' else 'clear')
         print(f"""
@@ -70,17 +57,17 @@ def show_intro():
         {PASSWORD_NUMBERS} numbers \n
         {PASSWORD_SPECIAL_CHARACTERS} special characters \n
         {PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n
+        """)
+        input(prompt_continue + "\n")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("""
         These settings can be edited according to the user's preferences.\n
         After generation, the password will be converted into a hash code.
         The hash code will be sent to the PWNED API to verify that the
         password has not been found in data breaches.\n
         Follow the steps in the Terminal to generate the password
         """)
-        prompt_continue = "press Enter to continue"
-        padding_continue = (terminal_width - len(prompt_instructions)) // 2
-        centered_prompt_continue = " " * padding_continue + prompt_continue
-        input(centered_prompt_continue + "\n")
-
+        input(prompt_continue + "\n")
 
 def get_account_data():
     """
