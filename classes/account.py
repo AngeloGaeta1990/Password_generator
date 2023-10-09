@@ -4,12 +4,13 @@ from tabulate import tabulate
 class Account():
     """
     Account class contains service, username password and password verification
+    self.password attribute including the password itself will be taken
+    from password class in the main function
     """
 
     def __init__(self, service, username):
         self.service = service
         self.username = username
-        self.password = None
         self.secure = "Not verified"
 
     def print_account(self):

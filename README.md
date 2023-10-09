@@ -1,21 +1,23 @@
 # Secure Password Generator
+
 ---
-## Site Overview:
-----
+
+## Site Overview
+
+---
 The "Secure Password Generator" is a robust tool designed to empower users with the capability to generate strong and highly secure passwords, all while addressing the growing concerns around password security in an increasingly digital age.
 
 While services like LastPass and Google Passwords offer secure password storage, they inherently rely on online platforms, which can potentially be vulnerable to cyber-attacks.On the other hand, the Secure Password Generator provides an offline solution for users who prioritize ultimate security and control over their password creation process.
 
 Live link to [Secure Password Generator](https://secure-password-generator-618a9b17c80c.herokuapp.com/)
 
-
 ![Secure Password Generator logo ASCII art](/media/logo_ascii_art.png)
 ![Secure Password Generator lock ASCII art](/media/lock_ascii_art.png)
 
-
-
 ## Table of Contents
+
 ---
+
 - [Secure Password Generator](#secure-password-generator)
   - [Site Overview:](#site-overview)
   - [Table of Contents](#table-of-contents)
@@ -40,20 +42,21 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
     - [Local](#local)
   - [Credits](#credits)
 
-    
-       
-
  ---
 
 ## Planning Phase
+
 ---
+
 ### Target Audience
+
 - Users who lack confidence in online password management services like LastPass or Google Password.
 - Users who are concerned about sending their credentials online and prefer to store them locally on their devices
 - Users who are already familiar with using Github.
 - The tool can generate only a limited number of strong passwords, particularly for sensitive accounts like bank accounts while relying on services like LastPass or Google Password for less critical services.
 
 ### Aim
+
 1. Enhance password generation customization: Enable users to specify password length, character types (e.g., letters, numbers, symbols), and other criteria to create passwords that meet their specific security requirements.
 1. Offline mode: Allow users to generate passwords even when not connected to the internet, ensuring the tool's functionality in offline environments.
 1. Develop a reliable command-line interface (CLI) tool for effective user input handling and validation.
@@ -64,8 +67,11 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 ![Algorithm flow chart](/media/pwd_generator.png)
 
 ## Features
+
 ### How to Generate a password
+
 1. ### First Screen
+
     At first, the user can see the *Secure Password Generator* ASCII art logo.
     ![Secure Password Generator logo ASCII art](/media/logo_ascii_art.png)  
     ![Secure Password Generator lock ASCII art](/media/lock_ascii_art.png)  
@@ -73,15 +79,15 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
     ![Instructions part1](/media/instructions_part_1.png)  
     ![Instructions part2](/media/instructions_part_2.png)  
-    
     or to press `Enter`to start generating a password.
-    
 
 1. ### Enter Account and Username
+
    The user has to enter their account name and username. These fields can accept strings of any length and type without verification.
    ![Account and Username Prompt](/media/user_and_account.png)  
 
-1. ### Verify Input:
+1. ### Verify Input
+
    The tool asks the user to verify that the entered information is correct. It converts the user response to lowercase, so `YES`, `Yes`, `yes` and `y` are all accepted.
 
    ![Verification](/media/user_and_account_verification.png)
@@ -89,7 +95,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
    If the answer is anything other than `yes`, the user is prompted to re-enter the service and username. If the response is neither `yes` nor `no`, the algorithm informs the user of the incorrect option, displays the options inserted, and asks for a username and service re-entry.
    If the answer is `no`, no error message is displayed, but the tool prompts the user to re-enter the service and username.
 
-1. ### Generate Password with Default Settings:
+1. ### Generate Password with Default Settings
 
      If the user's response is `yes`, the tool asks if the user wants to generate a password with default settings:
 
@@ -103,7 +109,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
      - If the user selects "yes" again, the algorithm generates a password with the default settings.
      - The user can choose whether to keep this password. If they answer "yes," the algorithm proceeds to the next steps. If they answer "no," a new password is generated with the same default settings.
 
-1. ### Edit Default Settings:
+1. ### Edit Default Settings
 
    If the user decides not to keep the default settings, they can edit the following parameters:
 
@@ -111,7 +117,6 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
    - Number of numbers
    - Number of special characters
    - Number of uppercase letters
-
 
     ![Edit default settings](/media/change_default_settings.png)  
 
@@ -122,13 +127,13 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
     ![Invalid custom settings](/media/invalid_custom_settings.png)
 
-1. ### Password Security Check: 
+1. ### Password Security Check
+
     If the user decides to keep the password, the algorithm queries the Pwned API. It generates a hash code containing only the first five characters of the password and searches the API results for a matching prefix.
 
     - If the password suffix appears in the API results, a message indicating that the password is present in the list of unsafe passwords appears.
     - If the suffix is absent in the API results, the algorithm shows a message stating that the password is secure.
     - If the algorithm can not reach the PWNED API, it reports it and marks the password as "not verified".
-
 
     ![Secure password](/media/secure_password_generated.png)
 
@@ -141,12 +146,12 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
     - Note that the file may not be accessible via a live link due to the deployment on Heroku. Users who clone the repository on their device can view and manipulate the file.
 
 1. ### Print Account Information
+
     The algorithm also prints the service, username, password, and password validation in a table format on the terminal.
     In this manner, even if the user does not deploy locally, he can still view the information clearly and copy-paste it to a secure location.
     ![Terminal output](/media/terminal_output.png)
 
-
-## Key Features and Benefits:
+## Key Features and Benefits
 
 - **Local Execution**: This tool operates exclusively locally, ensuring that the user password generation process remains impervious to online threats. Therefore, it does not expose the password to the internet.
 
@@ -164,21 +169,28 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
 - **Error Handling**: The tool handles contingencies gracefully. It will notify the user if the API connection fails or the password is not secure. The user has the option to regenerate a new password.
 
-- **User-Friendly Output**: Upon generating a secure password, the tool exports the results to a .csv file named "secure_password.csv." This file contains fields for the account (e.g., Netflix), a user identifier (user or user@mail.com), the generated password (e.g., mY_r8nd0m_pwd!), and a verification status indicating whether the password is secure or not.
+- **User-Friendly Output**: Upon generating a secure password, the tool exports the results to a .csv file named "secure_password.csv." This file contains fields for the account (e.g., Netflix), a user identifier (user or [E-mail Address](user@mail.com)), the generated password (e.g., mY_r8nd0m_pwd!), and a verification status indicating whether the password is secure or not.
 
 - **Ultimate Privacy**: Rest assured that the generated .csv file remains completely confidential and is not accessible on Heroku or any online platform, ensuring user password data is for the user's eyes only.
+
 ---
 
 ## Future-Enhancements
+
 ---
+
 - Implement a system to assess password complexity.
 - Provide the option to input data via command line arguments rather than relying solely on a command prompt.
 - Integrate synchronization with Google Docs or OneDrive.
 
 ## Data model
+
 ---
+
 ### Classes
+
 I decided to use a Python object-oriented programming approach, and I've used the following classes and attributes:
+
 ### Account Class
 
 It represents an account for a service provider.
@@ -201,7 +213,6 @@ It represents a password and its generation parameters.
 - `special_characters_length` (int, optional): The number of "special characters" to include in the password (default 2).
 - `upper_case_length` (int, optional): The number of uppercase letters to include in the password (default 2).
 
-
 **Attributes:**
 
 - `length` (int): The length of the password.
@@ -222,12 +233,14 @@ It represents a password and its generation parameters.
 
 It is a mixin class containing methods available to other "classes".
 It contains a different subclass for each function:
+
 - **NumbersMixin**: Generates a list of random numbers
 - **SpecialCharactersMixin**: Generates a list of random special characters
 - **UpperCaseLettersMixin**: Generates a list of random upper-case letters
 - **LowerCaseLettersMixin**: Generates a list of random lowercase letters
 
 ## Libraries
+
 - **csv**: Utilized for creating the output file secure_passwords.csv, which contains information such as service name, username, password, and password security verification.
 
 - **hashlib**: Utilized to convert passwords into hash codes, enhancing security.
@@ -243,9 +256,11 @@ It contains a different subclass for each function:
 - **tabulate**: Used to print the account, username, password, and password verification in the terminal in a table format.
 
 ## Testing
+
 ---
+
 1. **Prompt**: Press I for instructions, or press Enter to start  
-    **Tests**: 
+    **Tests**:
     - Letters different from `I` or `i`, numbers, and special characters did not trigger any action until the user pressed the `Enter` key.
     - The algorithm shows the instructions when the user presses `I` or `i` followed by the `Enter` key.
 1. **Prompt**: Follow the steps in the Terminal to generate the password press Enter to continue.  
@@ -253,7 +268,7 @@ It contains a different subclass for each function:
     - The developer tested different letters, numbers, and special characters. The algorithm shows the new prompt only when the user presses the `Enter` key.
 1. **Prompt**: Enter the name of the service here: and Enter the name of the service here:
    **Tests**:
-   -  Tested with numbers, special characters, and spaces, it returned the expected behavior.
+   - Tested with numbers, special characters, and spaces, it returned the expected behavior.
 1. **Prompt**: Are the service s and username s correct? (yes or no)  
    **Tests**:
    - Special characters, spaces, and numbers caused the repetition of the prompt.
@@ -266,25 +281,27 @@ It contains a different subclass for each function:
    - `n`, `N`, `NO`, `No`, and `no` triggered editing of default settings  
 1. **Prompt**: How many total characters do you want in your password?  
    **Tests**:
-   - Set the total characters to `5000` and the special characters, numbers, and uppercase letters to `34`.  it resulted in validation failure due to: `34 * 3 = 102` and `102 > 100`. 
+   - Set the total characters to `5000` and the special characters, numbers, and uppercase letters to `34`.  it resulted in validation failure due to: `34 * 3 = 102` and `102 > 100`.
    - Set the total characters, special characters, numbers, and uppercase letters to `0`. It resulted in an empty string password.  
    - Set the total characters to `100` and special characters, numbers, and uppercase letters to `25`. The algorithm generated the password as regular.
    - Set the total characters to `5000`, "special characters" to `40`, and numbers and uppercase letters to `10`.
     The algorithm generated a password of `100` characters, as expected.
    - Set the total characters to `30`, numbers to `30`, and special characters and uppercase letters to `0`. The algorithm generated a password of `30` numbers, as expected.
 1. **Prompt**: Do you want to keep this password? (yes/no)  
-   **Tests**: 
+   **Tests**:
      - Special characters, spaces, and numbers caused the repetition of the prompt.
-     -  `n`, `N`, `NO`, `No`, and `no` triggered editing of default settings and a new password generation.
+     - `n`, `N`, `NO`, `No`, and `no` triggered editing of default settings and a new password generation.
      - `y`, `Y`, `YES`, `Yes`, and `yes` prompted API verification.
-1.  **Prompt**: Press Enter to generate a password for a new Account  
+1. **Prompt**: Press Enter to generate a password for a new Account  
      **Test**:
      - Special characters, spaces, and numbers did not trigger any new prompts.
      - Pressing Enter caused the algorithm to restart as expected.
 
 ## Bugs fixing
+
 ---
-1. **Issue**: When the user enters an incorrect setting for "How many total characters?" The program proceeds to the next question.    
+
+1. **Issue**: When the user enters an incorrect setting for "How many total characters?" The program proceeds to the next question.
 **Solution**: The developer added a break statement at the end of each try block to prevent moving forward on incorrect input.
 1. **Issue**: Incorrect wording of the sentence: "Please enter the service you need the password for."  
 **Solution**: The developer clarified and corrected the wording for better user understanding.
@@ -293,80 +310,101 @@ It contains a different subclass for each function:
 1. **Issue**: An infinite loop occurs when the user modifies password settings.  
 **Solution**: The developer implemented a condition in the `get_password_info()` function that terminates the while loop once the algorithm generates a password.  
 1. **Issue**: Calling `Mixin.generate_random_numbers()` resulted in the error:
-    ```
+
+    ```python
     TypeError: "Mixin.generate_random_numbers() takes 1 positional argument, but 2 were given."
-    ```    
-    **Solution**: The developer updated the method signature to include self as the first argument: `def generate_random_numbers(self, amount)`.   
+    ```
+
+    **Solution**: The developer updated the method signature to include self as the first argument: `def generate_random_numbers(self, amount)`.
 1. **Issue**: Function `Mixin.generate_random_special_characters()` returns a boolean instead of a list of characters.  
 **Solution**: The developer replaced list comprehension with `random.sample` to correctly generate special characters.
 1. **Issue**: Lack of differentiation between lowercase and uppercase letters in generated passwords.  
  **Solution**: The developer added support for uppercase letters in password customization alongside special characters and numbers.  
 1. **Issue**: Special characters were mistakenly receiving the input intended for the number of characters.  
 **Solution**: The developer reassigned the variable to accept the input intended for special characters.
-1. **Issue**: An error occurred when calling the `account_dict()` class method.:  
-    ```
+1. **Issue**: An error occurred when calling the `account_dict()` class method.:
+
+    ```python
     account_dict = account.account_dict()
                     ^^^^^^^^^^^^^^^^^^^^
     AttributeError: 'function' object has no attribute 'account_dict'
     ```
-    The error resulted from mistakenly treating `account_dict` as a variable rather than invoking it as a function.
+
+The error resulted from mistakenly treating `account_dict` as a variable rather than invoking it as a function.
 **Solution**:  The developer corrected the usage by invoking the function as `account.account_dict()`.
+
 1. **Issue**: When deploying on Heroku, the following error occurred: "Module not found."  
 **Solution**: The developer updated the 'requirements.txt' file to include the necessary dependencies.
 1. **Issue**: There was a mention of 'secure_passwords.csv' in GitHub, caused by a typo in the filename when added to the .gitignore file.  
 **Solution**: The developer corrected the filename typo within the .gitignore file to prevent any reference to 'secure_passwords.csv' on GitHub.
 1. **Issue**: The algorithm generates a password even if the user provides invalid settings,  e.g. the total length of the password is < numbers amount + special characters amount + upper case amount.  
-**Solution**: The developer moved the password generation outside the while loop in the `edit_password_default()` function. Therefore, the algorithm generates the password only if there is validation. 
+**Solution**: The developer moved the password generation outside the while loop in the `edit_password_default()` function. Therefore, the algorithm generates the password only if there is validation.
 1. **Issue**: When the function `self.account_dict` was called within the function `print_account`, the following error was returned:
 
-    ```
+    ```python
     Error:
         table = tabulate(table_data.items(), headers=["Field", "Value"], tablefmt="grid")
                             ^^^^^^^^^^^^^^^^
         AttributeError: 'function' object has no attribute 'items'
-    ```  
-    **Solution**: The function was called as an attribute rather than as a function.
+    ```
+
+**Solution**: The function was called as an attribute rather than as a function.
     To resolve the issue, replace `self.account_dict` with `self.account_dict()`.
 
-1. **Issue**: After adding the tabulate module to the requirements.txt file and deploying the application on Heroku, the following error occurred: 
+1. **Issue**: After adding the tabulate module to the requirements.txt file and deploying the application on Heroku, the following error occurred:
+
+    ```python
+        ModuleNotFoundError: No module named 'tabulate'
     ```
-    ModuleNotFoundError: No module named 'tabulate'
-    ```  
-    **Solution**:  The issue was caused by activating a virtual environment using Conda, which resulted in a local path added to requirements.txt. To resolve the issue, create a separate virtual environment using Python instead of Conda. The latter will ensure that requirements.txt lists all dependencies correctly, and Heroku will install them during the deployment without issues. 
+
+    **Solution**:  The issue was caused by activating a virtual environment using Conda, which resulted in a local path added to requirements.txt. To resolve the issue, create a separate virtual environment using Python instead of Conda. The latter will ensure that requirements.txt lists all dependencies correctly, and Heroku will install them during the deployment without issues.
 1. **Issue**: The following error was returned by the function `edit_password_default` when user input did not meet the criteria to generate a password, for example, when the number of characters exceeds the total password length:
-    ```
+
+```python
             Error:
             UnboundLocalError: cannot access local variable 'password_length_int' where it is not associated with a value
             when assigning letter to password length
+ ```
 
-    ```  
-    **Solution**:  In the `edit_password_default function`, the `password` variable is defined outside the `while` loop. Therefore, the algorithm generates it, even if there is no validation. To resolve the issue, the developer added an `if` statement to create a password only when there is a validation. The latter ensures that the `password` variable is only assigned a value when the criteria are satisfied.
-1. **Issue**: There was too much space separating terminal prints.      
-**Solution**: The issue was caused by using a backslash \ to separate long strings, resulting in extra space. To resolve it, you can either use a new f"" or close and start a new "", for example: 
-    ```
+**Solution**:  In the `edit_password_default function`, the `password` variable is defined outside the `while` loop. Therefore, the algorithm generates it, even if there is no validation. To resolve the issue, the developer added an `if` statement to create a password only when there is a validation. The latter ensures that the `password` variable is only assigned a value when the criteria are satisfied.
+
+1. **Issue**: There was too much space separating terminal prints.
+
+**Solution**: The issue was caused by using a backslash \ to separate long strings, resulting in extra space. To resolve it, you can either use a new f"" or close and start a new "", for example:
+
+```python
     print("My very"
             " long string") 
-    ```  
+```
+
 1. **Issue**:  There was an infinite loop in the `generate_password function`. The developer implemented a while loop within the `else` statement to wait until the user's answer was either `yes` or `no` before generating or using a password. However, even if the user entered `yes` or `no`, the loop continued to repeat.  
 **Solution**: Replace the following condition:
-    ```
+
+```python
     while (user_decision != "yes" or user_decision != "y" or
                        user_decision != "no" or user_decision != "n"):
-    ```
-    With this condition:
-    ```
+```
+
+With this condition:
+
+```python
     while not (user_decision == "yes" or user_decision == "y" or
                        user_decision == "no" or user_decision == "n"):
-    ```  
-    The corrected condition ensures that the loop will exit when the user enters "yes," "y," "no," or "n," resolving the issue of the infinite loop.
+```
+
+The corrected condition ensures that the loop will exit when the user enters "yes," "y," "no," or "n," resolving the issue of the infinite loop.
+
 1. **Issue**: Passwords were always showing as not verified.  
-**Solution**: During the restyling of the code to meet flake8 rules, the developer in function update_account`added `not password.secure` instead of just `password.secure`. To resolve the issue, remove the `not` keyword.
+**Solution**: During the restyling of the code to meet flake8 rules, the developer in function `update_account`added `not password.secure` instead of just `password.secure`. To resolve the issue, remove the `not` keyword.
 1. **Issue**: Selecting more than `30` special characters resulted in an error.  
 **Solution**:  Replace `random.sample` with `random.choices` in the `generate_random_special_characters` function. Using `random.choices` allows the user to select more characters than the length of the list of special characters.
 
 ## Deployment
+
 ---
+
 ### Heroku
+
 The deployment has been performed on Heroku as follows:
 
 1. **Create a Heroku Account:**
@@ -410,6 +448,7 @@ You can monitor the deployment process by clicking the "View" button in the "Bui
 Once the deployment is successful, you can access your deployed app by clicking the "Open app" button at the top of the page.
 
 ### Local
+
 Clone this repository locally to enable the generation of the 'secure_password.csv' file containing the list of created accounts and generated passwords.
 To have this repository on your local machine, follow these steps:"  
 
@@ -417,54 +456,72 @@ To have this repository on your local machine, follow these steps:"
 On your local machine, open a terminal or command prompt. You'll use this to enter commands.
 1. **Navigate to Your Desired Directory:**
 Use the `cd` (change directory) command to navigate to the directory where you want to create the virtual environment and clone the GitHub repository. For example:
-    ```
+
+    ```cmd
+
     cd /path/to/your/directory
     ```
+
 1. **Create a Virtual Environment:**
-Use the following command to create a virtual environment. 
-    ```
+Use the following command to create a virtual environment.
+
+    ```cmd
     python -m venv pwd_generator
     ```
+
     This command will create a virtual environment named `pwd_generator` in the current directory.
 1. **Activate the Virtual Environment:**
 To activate the virtual environment, use the appropriate command based on your operating system:
     - On Windows:
-        ```
+
+        ```cmd
         pwd_generator\Scripts\activate
         ```
+
     - On macOS and Linux
-        ```
+
+        ```bash
         source pwd_generator/bin/activate
         ```
-    
+
 1. **Install Git** (if not already installed):
-    If you did not install Git on your system,  you can download and install it from the official Git website: https://git-scm.com/downloads  
+    If you did not install Git on your system,  you can download and install it from the official Git website: [Git download](https://git-scm.com/downloads)  
 1. **Clone the GitHub Repository:**
-    Use the git clone command to clone the GitHub repository. 
-    ```
+    Use the git clone command to clone the GitHub repository.
+
+    ```cmd
     git clone https://github.com/AngeloGaeta1990/Password_generator.git
     ```
+
    This command will download the repository files to your current directory.
 1. **Navigate to the Cloned Repository Directory:**
-    Use the `cd` command to navigate into the cloned repository directory:  
-    ```
+    Use the `cd` command to navigate into the cloned repository directory:
+  
+    ```cmd
     cd Password-generator
     ```
+
 1. **Install Libraries from requirements.txt:**
     Use the `pip install -r` command to install the libraries listed in the requirements.txt file.
-    ```
+
+    ```cmd
     pip install -r requirements.txt
-    ``` 
+    ```
+
     This command will install all the required libraries and dependencies specified in the requirements.txt file within your virtual environment.
 1. **Deactivate the Virtual Environment:**
     When you want to stop the virtual environment, you can deactivate it using the following command:
-    ```
+
+    ```cmd
     deactivate
     ```
+
     The latter will bring you back to the global Python environment.
+
 ## Credits
+
 - [Lucidchart](https://www.lucidchart.com/pages/) for the generation of the Diagram
 - [Code institute](https://codeinstitute.net/) for providing the template used in this project
 - [Chatgpt](https://openai.com/blog/chatgpt) for assisting in troubleshooting and proofreading
 - [PWNED](https://haveibeenpwned.com/) for providing the API method to verify if a password is secure.
-- Great thanks to [David Bowers](https://github.com/dnlbowers) for assisting in shaping the project and providing the motivation to move forward. 
+- Great thanks to [David Bowers](https://github.com/dnlbowers) for assisting in shaping the project and providing the motivation to move forward.
