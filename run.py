@@ -139,7 +139,8 @@ def edit_password_default():
                                      " in your password?"
                                      " (enter a number e.g.10)\n"
                                      " A maximum of 100 characters is allowed."
-                                     " if your value is >100, a password of"
+                                     " if your value is >100,\n"
+                                     " a password of"
                                      " 100 characters characters will be"
                                      " generated\n"))
             password_length_int = int(password_length)
