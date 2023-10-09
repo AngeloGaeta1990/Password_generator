@@ -1,6 +1,7 @@
 import random
 import hashlib
 import requests
+import os
 from .mixin import NumbersMixin
 from .mixin import SpecialCharactersMixin
 from .mixin import UpperCaseLettersMixin
@@ -88,6 +89,7 @@ class Password (NumbersMixin, SpecialCharactersMixin,
         Sends hash code to Pwned Passwords API and
         verifies if API has been hacked
         """
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("Reaching Pwned Password API")
         try:
             response = requests.get(
