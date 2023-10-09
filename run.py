@@ -271,8 +271,11 @@ def show_output_in_terminal(account):
     print(f"The data for the {account.service} account are below ")
     print(account.print_account())
     print("Please store this data in a secure and confidential location.")
-    input("Press Enter to generate a password for a new Account\n")
+    quit_input = input("Press Enter to generate a password"
+                       " for a new Account or Q to quit\n").lower()
     os.system('cls' if os.name == 'nt' else 'clear')
+    quit = True if quit_input == "q" else False
+    return quit
 
 
 def create_password_file(account, filename="secure_passwords.csv"):
@@ -303,14 +306,15 @@ def main():
     """
     Main function
     """
+    quit = True
     while True:
-        show_intro()
+        show_intro() if quit else None
         account = get_account_data()
         password_info = get_password_info()
         password = generate_password(password_info)
         password_api = api_verification(password)
         updated_account = update_account(account, password_api)
-        show_output_in_terminal(updated_account)
+        quit = show_output_in_terminal(updated_account)
         create_password_file(updated_account)
 
 
