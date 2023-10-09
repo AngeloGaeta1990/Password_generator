@@ -2,16 +2,19 @@ import random
 import hashlib
 import requests
 import os
-from .mixin import NumbersMixin
-from .mixin import SpecialCharactersMixin
-from .mixin import UpperCaseLettersMixin
-from .mixin import LowerCaseLettersMixin
+from .mixins import NumbersMixin
+from .mixins import SpecialCharactersMixin
+from .mixins import UpperCaseLettersMixin
+from .mixins import LowerCaseLettersMixin
 
 
 class Password (NumbersMixin, SpecialCharactersMixin,
                 UpperCaseLettersMixin, LowerCaseLettersMixin):
     """
     Password class contains all the info required to build password
+    This class methods will generate extra class attributes were necessary
+    including list of numbers, special characters, and uppercase letters
+    the password itself and its conversion to hash code are also added
     """
     PWNED_API_URL = "https://api.pwnedpasswords.com/range/"
 
@@ -24,13 +27,6 @@ class Password (NumbersMixin, SpecialCharactersMixin,
         self.lower_case_length = self.length - \
             (self.special_characters_length +
              self.numbers_length + self.upper_case_length)
-        self.pwd = None
-        self.numbers_list = None
-        self.special_characters_list = None
-        self.upper_case_list = None
-        self.lower_case_list = None
-        self.hash_code = None
-        self.prefix = None
 
     def add_numbers_list(self):
         """

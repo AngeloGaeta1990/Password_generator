@@ -2,13 +2,7 @@ import random
 import string
 
 
-class Mixin:
-    """
-    This class contain methods which can be used by all classes
-    """
-
-
-class NumbersMixin(Mixin):
+class NumbersMixin():
     """
     Mixin subclass for generating random numbers.
     """
@@ -20,7 +14,7 @@ class NumbersMixin(Mixin):
         return numbers
 
 
-class SpecialCharactersMixin(Mixin):
+class SpecialCharactersMixin():
     """
     Mixin subclass for generating random special characters.
     """
@@ -36,7 +30,7 @@ class SpecialCharactersMixin(Mixin):
         return special_characters
 
 
-class UpperCaseLettersMixin(Mixin):
+class UpperCaseLettersMixin():
     """
     Mixin subclass for generating random uppercase letters.
     """
@@ -49,7 +43,7 @@ class UpperCaseLettersMixin(Mixin):
         return random_letters
 
 
-class LowerCaseLettersMixin(Mixin):
+class LowerCaseLettersMixin():
     """
     Mixin subclass for generating random lowercase letters.
     """
