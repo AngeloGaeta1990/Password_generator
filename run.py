@@ -38,6 +38,7 @@ def show_intro():
     """
     Show ASCII art and tool instructions and centers them
     """
+
     # ASCII_ART
     print(ASCII_ART)
     # Tool instructions
@@ -48,26 +49,27 @@ def show_intro():
     if start_tool == "i":
         os.system('cls' if os.name == 'nt' else 'clear')
         print(f"""
-        This tool will generate a secure password for the account of your
-        choice, e.g., Netflix.
-        The generated password will not be saved in the cloud to enhance
-        security. \n
-        By default the password generated will have the different features:\n
-        {PASSWORD_CHARACTERS} characters in total (max 100)\n
-        {PASSWORD_NUMBERS} numbers \n
-        {PASSWORD_SPECIAL_CHARACTERS} special characters \n
-        {PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n
-        """)
+This tool will generate a secure password for the account of your
+choice, e.g., Netflix.
+The generated password will not be saved in the cloud to enhance
+security. \n
+By default the password generated will have the different features:\n
+{PASSWORD_CHARACTERS} characters in total (max 100)\n
+{PASSWORD_NUMBERS} numbers \n
+{PASSWORD_SPECIAL_CHARACTERS} special characters \n
+{PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n
+""")
         input(prompt_continue + "\n")
         os.system('cls' if os.name == 'nt' else 'clear')
         print("""
-        These settings can be edited according to the user's preferences.\n
-        After generation, the password will be converted into a hash code.
-        The hash code will be sent to the PWNED API to verify that the
-        password has not been found in data breaches.\n
-        Follow the steps in the Terminal to generate the password
-        """)
+These settings can be edited according to the user's preferences.\n
+After generation, the password will be converted into a hash code.
+The hash code will be sent to the PWNED API to verify that the
+password has not been found in data breaches.\n
+Follow the steps in the Terminal to generate the password
+""")
         input(prompt_continue + "\n")
+
 
 def get_account_data():
     """
