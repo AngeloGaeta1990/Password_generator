@@ -19,7 +19,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 ---
 
 - [Secure Password Generator](#secure-password-generator)
-  - [Site Overview:](#site-overview)
+  - [Site Overview](#site-overview)
   - [Table of Contents](#table-of-contents)
   - [Planning Phase](#planning-phase)
     - [Target Audience](#target-audience)
@@ -27,7 +27,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
     - [Flow chart](#flow-chart)
   - [Features](#features)
     - [How to Generate a password](#how-to-generate-a-password)
-  - [Key Features and Benefits:](#key-features-and-benefits)
+  - [Key Features and Benefits](#key-features-and-benefits)
   - [Future-Enhancements](#future-enhancements)
   - [Data model](#data-model)
     - [Classes](#classes)
@@ -525,3 +525,4 @@ To activate the virtual environment, use the appropriate command based on your o
 - [Chatgpt](https://openai.com/blog/chatgpt) for assisting in troubleshooting and proofreading
 - [PWNED](https://haveibeenpwned.com/) for providing the API method to verify if a password is secure.
 - Great thanks to [David Bowers](https://github.com/dnlbowers) for assisting in shaping the project and providing the motivation to move forward.
+- test
