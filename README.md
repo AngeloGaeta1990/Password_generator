@@ -12,7 +12,6 @@ While services like LastPass and Google Passwords offer secure password storage,
 Live link to [Secure Password Generator](https://secure-password-generator-618a9b17c80c.herokuapp.com/)
 
 ![Secure Password Generator logo ASCII art](/media/logo_ascii_art.png)
-![Secure Password Generator lock ASCII art](/media/lock_ascii_art.png)
 
 ## Table of Contents
 
@@ -33,7 +32,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
     - [Classes](#classes)
     - [Account Class](#account-class)
     - [Password Class](#password-class)
-    - [Mixin Class](#mixin-class)
+    - [Mixins Classes](#mixins-classes)
   - [Libraries](#libraries)
   - [Testing](#testing)
   - [Bugs fixing](#bugs-fixing)
@@ -228,10 +227,10 @@ It represents a password and its generation parameters.
 - `prefix` (str): The first five characters of the hash code (initialized as None).
 - `secure` (bool): True if the API reported that the password is secure, False otherwise, and None if there is no API response.
 
-### Mixin Class
+### Mixins Classes
 
-It is a mixin class containing methods available to other "classes".
-It contains a different subclass for each function:
+The mixins file contains a class for each function.
+Each function is generic, and developers can import them outside this project context. It also simplifies future enhancements, as new classes can inherit them.
 
 - **NumbersMixin**: Generates a list of random numbers
 - **SpecialCharactersMixin**: Generates a list of random special characters
@@ -329,7 +328,7 @@ It contains a different subclass for each function:
     AttributeError: 'function' object has no attribute 'account_dict'
     ```
 
-The error resulted from mistakenly treating `account_dict` as a variable rather than invoking it as a function.
+    The error resulted from mistakenly treating `account_dict` as a variable rather than invoking it as a function.
 **Solution**:  The developer corrected the usage by invoking the function as `account.account_dict()`.
 
 1. **Issue**: When deploying on Heroku, the following error occurred: "Module not found."  
@@ -347,7 +346,7 @@ The error resulted from mistakenly treating `account_dict` as a variable rather 
         AttributeError: 'function' object has no attribute 'items'
     ```
 
-**Solution**: The function was called as an attribute rather than as a function.
+    **Solution**: The function was called as an attribute rather than as a function.
     To resolve the issue, replace `self.account_dict` with `self.account_dict()`.
 
 1. **Issue**: After adding the tabulate module to the requirements.txt file and deploying the application on Heroku, the following error occurred:
@@ -359,39 +358,39 @@ The error resulted from mistakenly treating `account_dict` as a variable rather 
     **Solution**:  The issue was caused by activating a virtual environment using Conda, which resulted in a local path added to requirements.txt. To resolve the issue, create a separate virtual environment using Python instead of Conda. The latter will ensure that requirements.txt lists all dependencies correctly, and Heroku will install them during the deployment without issues.
 1. **Issue**: The following error was returned by the function `edit_password_default` when user input did not meet the criteria to generate a password, for example, when the number of characters exceeds the total password length:
 
-```python
-            Error:
-            UnboundLocalError: cannot access local variable 'password_length_int' where it is not associated with a value
-            when assigning letter to password length
- ```
+    ```python
+                Error:
+                UnboundLocalError: cannot access local variable 'password_length_int' where it is not associated with a value
+                when assigning letter to password length
+    ```
 
-**Solution**:  In the `edit_password_default function`, the `password` variable is defined outside the `while` loop. Therefore, the algorithm generates it, even if there is no validation. To resolve the issue, the developer added an `if` statement to create a password only when there is a validation. The latter ensures that the `password` variable is only assigned a value when the criteria are satisfied.
+    **Solution**:  In the `edit_password_default function`, the `password` variable is defined outside the `while` loop. Therefore, the algorithm generates it, even if there is no validation. To resolve the issue, the developer added an `if` statement to create a password only when there is a validation. The latter ensures that the `password` variable is only assigned a value when the criteria are satisfied.
 
 1. **Issue**: There was too much space separating terminal prints.
 
-**Solution**: The issue was caused by using a backslash \ to separate long strings, resulting in extra space. To resolve it, you can either use a new f"" or close and start a new "", for example:
+    **Solution**: The issue was caused by using a backslash \ to separate long strings, resulting in extra space. To resolve it, you can either use a new f"" or close and start a new "", for example:
 
-```python
-    print("My very"
-            " long string") 
-```
+    ```python
+        print("My very"
+                " long string") 
+    ```
 
 1. **Issue**:  There was an infinite loop in the `generate_password function`. The developer implemented a while loop within the `else` statement to wait until the user's answer was either `yes` or `no` before generating or using a password. However, even if the user entered `yes` or `no`, the loop continued to repeat.  
 **Solution**: Replace the following condition:
 
-```python
-    while (user_decision != "yes" or user_decision != "y" or
-                       user_decision != "no" or user_decision != "n"):
-```
+    ```python
+        while (user_decision != "yes" or user_decision != "y" or
+                        user_decision != "no" or user_decision != "n"):
+    ```
 
-With this condition:
+    With this condition:
 
-```python
-    while not (user_decision == "yes" or user_decision == "y" or
-                       user_decision == "no" or user_decision == "n"):
-```
+    ```python
+        while not (user_decision == "yes" or user_decision == "y" or
+                        user_decision == "no" or user_decision == "n"):
+    ```
 
-The corrected condition ensures that the loop will exit when the user enters "yes," "y," "no," or "n," resolving the issue of the infinite loop.
+    The corrected condition ensures that the loop will exit when the user enters `yes`,`y`,`no`, or `n`, resolving the issue of the infinite loop.
 
 1. **Issue**: Passwords were always showing as not verified.  
 **Solution**: During the restyling of the code to meet flake8 rules, the developer in function `update_account`added `not password.secure` instead of just `password.secure`. To resolve the issue, remove the `not` keyword.
@@ -523,4 +522,5 @@ To activate the virtual environment, use the appropriate command based on your o
 - [Code institute](https://codeinstitute.net/) for providing the template used in this project
 - [Chatgpt](https://openai.com/blog/chatgpt) for assisting in troubleshooting and proofreading
 - [PWNED](https://haveibeenpwned.com/) for providing the API method to verify if a password is secure.
+- [textkool](https://textkool.com/en/ascii-art-generator?hl=default&vl=default&font=Red%20Phoenix&text=Your%20text%20here%20) for thr generation of ASCII art.
 - Great thanks to [David Bowers](https://github.com/dnlbowers) for assisting in shaping the project and providing the motivation to move forward.
