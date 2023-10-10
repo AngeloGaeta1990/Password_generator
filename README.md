@@ -53,7 +53,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 - Users who lack confidence in online password management services like LastPass or Google Password.
 - Users who are concerned about sending their credentials online and prefer to store them locally on their devices
 - Users who are already familiar with using Github.
-- The tool can generate only a limited number of strong passwords, particularly for sensitive accounts like bank accounts while relying on services like LastPass or Google Password for less critical services.
+- Users can generate a limited number of strong passwords, particularly for sensitive accounts like bank accounts while relying on services like LastPass or Google Password for less critical services.
 
 ### Aim
 
@@ -105,8 +105,8 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
      ![Default password settings](/media/default_password.png)  
 
-     - If the user selects "yes" again, the algorithm generates a password with the default settings.
-     - The user can choose whether to keep this password. If they answer "yes," the algorithm proceeds to the next steps. If they answer "no," a new password is generated with the same default settings.
+     - If the user selects `yes` again, the algorithm generates a password with the default settings.
+     - The user can choose whether to keep this password. If they answer `yes`, the algorithm proceeds to the next steps. If they answer `no`, a new password is generated with the same default settings.
 
 5. ### Edit Default Settings
 
@@ -142,7 +142,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
     ![secure_password.csv](/media/secure_password_csv.png)
 
-    - Note that the file may not be accessible via a live link due to the deployment on Heroku. Users who clone the repository on their device can view and manipulate the file.
+    - Note that the file may not be accessible via the live link due to the deployment on Heroku. Users who clone the repository on their device can view and manipulate the file.
 
 8. ### Print Account Information
 
@@ -154,7 +154,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
 - **Local Execution**: This tool operates exclusively locally, ensuring that the user password generation process remains impervious to online threats. Therefore, it does not expose the password to the internet.
 
-- **Python-Based Implementation**: I implemented this tool using Python as the programming language, renowned for its reliability and security. Therefore, the entire process is transparent, trustworthy, and under your direct supervision.
+- **Python-Based Implementation**: I implemented this tool using Python as the programming language, renowned for its reliability and security. Therefore, the entire process is transparent, and trustworthy.
 
 - **Enhanced Password Complexity**: By default, the Secure Password Generator generates a password with a ten-character length, including two numbers,  two "special characters", and two uppercase letters. This combination of character types and their random arrangement significantly amplifies password security.
 
@@ -164,7 +164,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 
 - **Validation Checks**: The tool performs rigorous validation checks to ensure the correctness of user inputs. It verifies that the chosen password length is greater than or equal to the sum of "special characters", numbers, and uppercase letters.
 
-- **Hashed Password Verification**: The algorithm further bolsters security by converting the generated into a hash code. It only transmits the first five characters of this hash code to the PWNED API, which offers a method to verify if a password is compromised. This process ensures your passwords remain untainted by known security breaches.
+- **Hashed Password Verification**: The algorithm further bolsters security by converting the generated password into a hash code. It only transmits the first five characters of this hash code to the PWNED API, which offers a method to verify if a password is compromised. This process ensures user passwords remain untainted by known security breaches.
 
 - **Error Handling**: The tool handles contingencies gracefully. It will notify the user if the API connection fails or the password is not secure. The user has the option to regenerate a new password.
 
@@ -244,7 +244,7 @@ Each function is generic, and developers can import them outside this project co
 
 - **hashlib**: Utilized to convert passwords into hash codes, enhancing security.
 
-- **os**: Used to obtain the terminal length and centre the output.  
+- **os**: Used to clear terminal when appropriate.
 
 - **random**: Employed to generate a random list of upper and lower case characters, numbers, and special characters.  
 
@@ -365,7 +365,7 @@ Each function is generic, and developers can import them outside this project co
                 when assigning letter to password length
     ```
 
-    **Solution**:  In the `edit_password_default function`, the `password` variable is defined outside the `while` loop. Therefore, the algorithm generates it, even if there is no validation. To resolve the issue, the developer added an `if` statement to create a password only when there is a validation. The latter ensures that the `password` variable is only assigned a value when the criteria are satisfied.
+    **Solution**:  In the `edit_password_default` function, the `password` variable is defined outside the `while` loop. Therefore, the algorithm generates it, even if there is no validation. To resolve the issue, the developer added an `if` statement to create a password only when there is a validation. The latter ensures that the `password` variable is only assigned a value when the criteria are satisfied.
 
 1. **Issue**: There was too much space separating terminal prints.
 
@@ -407,7 +407,7 @@ Each function is generic, and developers can import them outside this project co
 The deployment has been performed on Heroku as follows:
 
 1. **Create a Heroku Account:**
-    If you don't have a Heroku account, sign up for one at Heroku's website.
+If you don't have a Heroku account, sign up for one at Heroku's website.
 1. **Log In to Heroku:**
 Log in to your Heroku account using your credentials.
 1. **Access Heroku Dashboard:**
