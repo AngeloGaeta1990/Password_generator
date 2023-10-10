@@ -40,6 +40,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
     - [Heroku](#heroku)
     - [Local](#local)
   - [Credits](#credits)
+  - [Notes](#notes)
 
  ---
 
@@ -518,9 +519,17 @@ To activate the virtual environment, use the appropriate command based on your o
 
 ## Credits
 
+Great thanks to:
+
 - [Lucidchart](https://www.lucidchart.com/pages/) for the generation of the Diagram
 - [Code institute](https://codeinstitute.net/) for providing the template used in this project
 - [Chatgpt](https://openai.com/blog/chatgpt) for assisting in troubleshooting and proofreading
 - [PWNED](https://haveibeenpwned.com/) for providing the API method to verify if a password is secure.
 - [textkool](https://textkool.com/en/ascii-art-generator?hl=default&vl=default&font=Red%20Phoenix&text=Your%20text%20here%20) for the generation of ASCII art.
-- Great thanks to [David Bowers](https://github.com/dnlbowers) for assisting in shaping the project and providing the motivation to move forward.
+- [David Bowers](https://github.com/dnlbowers) for assisting in shaping the project and providing the motivation to move forward.
+
+## Notes
+
+- The developer executed two commits from a device connected to a different Github account.
+Therefore, two contributors appear in the repository present.
+- The developer hard reset the repository to the commit preceding the other contributor commits.
