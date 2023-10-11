@@ -527,9 +527,3 @@ Great thanks to:
 - [PWNED](https://haveibeenpwned.com/) for providing the API method to verify if a password is secure.
 - [textkool](https://textkool.com/en/ascii-art-generator?hl=default&vl=default&font=Red%20Phoenix&text=Your%20text%20here%20) for the generation of ASCII art.
 - [David Bowers](https://github.com/dnlbowers) for assisting in shaping the project and providing the motivation to move forward.
-
-## Notes
-
-- The developer executed two commits from a device connected to a different Github account.
-Therefore, two contributors appear in the repository present.
-- The developer hard reset the repository to the commit preceding the other contributor commits.
