@@ -50,7 +50,7 @@ choice, e.g., Netflix.
 The generated password will not be saved in the cloud to enhance
 security. \n
 By default the password generated will have the different features:\n
-{PASSWORD_CHARACTERS} characters in total (max 100)\n
+{PASSWORD_CHARACTERS} characters in total (max {MAX_PASSWORD_CHARACTERS})\n
 {PASSWORD_NUMBERS} numbers \n
 {PASSWORD_SPECIAL_CHARACTERS} special characters \n
 {PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n
@@ -112,8 +112,14 @@ def get_password_info():
     print(f"{PASSWORD_SPECIAL_CHARACTERS} special characters \n")
     print(f"{PASSWORD_UPPER_CASE_CHARACTERS} capital letters \n")
     while no_confirmation:
+        print()
         approval = input("Do you want to keep the default"
-                         " settings? (yes/no)\n").lower()
+                         " settings? (yes/no)\n"
+                         f"{PASSWORD_CHARACTERS} characters in total \n"
+                         f"{PASSWORD_NUMBERS} numbers \n"
+                         f"{PASSWORD_SPECIAL_CHARACTERS} special characters \n"
+                         f"{PASSWORD_UPPER_CASE_CHARACTERS} capital "
+                         f"letters \n").lower()
         if approval == "yes" or approval == "y":
             no_confirmation = False
             password = Password()
@@ -132,51 +138,11 @@ def edit_password_default():
     """
     validation = False
     while not validation:
-        try:
-            password_length = input(("How many total characters do you want"
-                                     " in your password?"
-                                     " (enter a number e.g.10)\n"
-                                     " A maximum of 100 characters is allowed."
-                                     " if your value is >100,\n"
-                                     " a password of"
-                                     " 100 characters characters will be"
-                                     " generated\n"))
-            password_length_int = int(password_length)
-            password_length_int = (100 if password_length_int >
-                                   100 else password_length_int)
-        except ValueError:
-            print(f"You entered {password_length},"
-                  f" you should enter an integer number e.g. 10\n"
-                  f" Let's try again.")
-            break
-        try:
-            numbers_length = input(("How many numbers do you want in your"
-                                    " password? (enter a number e.g.2)\n"))
-            numbers_int = int(numbers_length)
-        except ValueError:
-            print(f"You entered {numbers_length},"
-                  f" you should enter an integer number"
-                  f" e.g. 10\nLet's try again.")
-            break
-        try:
-            special_characters_length = input(("How many special characters"
-                                               " do you want in your password?"
-                                               " (enter a number e.g.2)\n"))
-            special_characters_int = int(special_characters_length)
-        except ValueError:
-            print(f"You entered {special_characters_length},"
-                  f" you should enter an integer number e.g. 10\n"
-                  f" Let's try again.")
-            break
-        try:
-            upper_case_length = input(("How many upper case letters"
-                                       " do you want in your password?"
-                                       " (enter a number e.g.2)\n"))
-            upper_case_letters_int = int(upper_case_length)
-        except ValueError:
-            print(f"You entered {upper_case_length},"
-                  f" you should enter a number e.g. 10\nLet's try again.")
-            break
+        os.system('cls' if os.name == 'nt' else 'clear')
+        password_length_int = edit_password_length()
+        numbers_int = edit_number_length()
+        special_characters_int = edit_special_characters_length()
+        upper_case_letters_int = edit_uppercase_length()
         validation = validate_new_password_settings(password_length_int,
                                                     numbers_int,
                                                     special_characters_int,
@@ -185,6 +151,91 @@ def edit_password_default():
                             special_characters_int,
                             upper_case_letters_int) if validation else None
         return password
+
+
+def edit_password_length():
+    """
+    Edits the default password length
+    """
+    no_length = True
+    while no_length:
+        try:
+            password_length = input((f"How many total characters do you want"
+                                     f" in your password?"
+                                     f" (enter a number e.g.10)\n"
+                                     f"A maximum of {MAX_PASSWORD_CHARACTERS}"
+                                     f" characters is allowed."
+                                     f" If your value is >"
+                                     f" {MAX_PASSWORD_CHARACTERS},\n"
+                                     f"a password of"
+                                     f" {MAX_PASSWORD_CHARACTERS} characters"
+                                     f" will be generated\n"))
+            password_length_int = int(password_length)
+            no_length = False
+            password_length_int = (MAX_PASSWORD_CHARACTERS
+                                   if password_length_int >
+                                   MAX_PASSWORD_CHARACTERS else
+                                   password_length_int)
+        except ValueError:
+            print(f"You entered {password_length},"
+                  f" you should enter an integer number e.g. 10\n"
+                  f"Let's try again.")
+    return password_length_int
+
+
+def edit_number_length():
+    """
+    Edits the default numbers length settings
+    """
+    no_number = True
+    while no_number:
+        try:
+            numbers_length = input(("How many numbers do you want in your"
+                                    " password? (enter a number e.g.2)\n"))
+            numbers_int = int(numbers_length)
+            no_number = False
+        except ValueError:
+            print(f"You entered {numbers_length},"
+                  f" you should enter an integer number"
+                  f" e.g. 10\nLet's try again.")
+    return numbers_int
+
+
+def edit_special_characters_length():
+    """
+    Edits the default special characters length
+    """
+    no_special_character = True
+    while no_special_character:
+        try:
+            special_characters_length = input(("How many special characters"
+                                               " do you want in your password?"
+                                               " (enter a number e.g.2)\n"))
+            special_characters_int = int(special_characters_length)
+            no_special_character = False
+        except ValueError:
+            print(f"You entered {special_characters_length},"
+                  f" you should enter an integer number e.g. 10\n"
+                  f"Let's try again.")
+    return special_characters_int
+
+
+def edit_uppercase_length():
+    """
+    Edits the default uppercase length
+    """
+    no_uppercase = True
+    while no_uppercase:
+        try:
+            upper_case_length = input(("How many upper case letters"
+                                       " do you want in your password?"
+                                       " (enter a number e.g.2)\n"))
+            upper_case_letters_int = int(upper_case_length)
+            no_uppercase = False
+        except ValueError:
+            print(f"You entered {upper_case_length},"
+                  f" you should enter a number e.g. 10\nLet's try again.")
+    return upper_case_letters_int
 
 
 def validate_new_password_settings(password_length_int, numbers_int,
@@ -200,13 +251,14 @@ def validate_new_password_settings(password_length_int, numbers_int,
     if (total_characters <= password_length_int):
         return True
     else:
-        print(f"You have selected {numbers_int} numbers, "
-              f" {special_characters_int} special characters and "
-              f" {upper_case_letters_int} upper case letters\n")
-        print(f" resulting in a total of {total_characters} characters\n")
-        print(f" this exceeds the desired password length of "
-              f" {password_length_int} characters\n")
-        print("Please try again")
+        print()
+        print(f"You have selected {numbers_int} numbers,"
+              f" {special_characters_int} special characters and"
+              f" {upper_case_letters_int} upper case letters\n"
+              f"resulting in a total of {total_characters} characters.\n"
+              f"This exceeds the desired password length of"
+              f" {password_length_int} characters.\n"
+              f"Please try again.")
         return False
 
 

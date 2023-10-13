@@ -103,7 +103,7 @@ class Password (NumbersMixin, SpecialCharactersMixin,
                           f"{line.split(':')[1]} times in data breaches.")
                 elif self.secure:
                     print(f"The password '{self.pwd}' has not been found"
-                          f"in data breaches.")
+                          f" in data breaches.")
             else:
                 print("Warning: Unable to connect to the API. I can not check"
                       " if your password has already been exposed")
