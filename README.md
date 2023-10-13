@@ -23,6 +23,7 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
   - [Planning Phase](#planning-phase)
     - [Target Audience](#target-audience)
     - [Aim](#aim)
+    - [Achievements](#achievements)
     - [Flow chart](#flow-chart)
   - [Features](#features)
     - [How to Generate a password](#how-to-generate-a-password)
@@ -60,6 +61,13 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
 1. Offline mode: Allow users to generate passwords even when not connected to the internet, ensuring the tool's functionality in offline environments.
 1. Develop a reliable command-line interface (CLI) tool for effective user input handling and validation.
 1. Establish API integration: Create a tool that can interact seamlessly with external APIs to enhance functionality.
+
+### Achievements
+
+1. The user can fully customize the password by changing its length, amount of numbers, special characters, and upper and lower case letters.
+1. The user can deploy the repository locally and save the password and the username for the service of choice in a .csv file.
+1. The tool checks if the password is in the data breach list by using the PWNED API method.
+1. The tool is responsive and provides an easy walkthrough to the user. It handles errors efficiently and guides the user in the resolution.
 
 ### Flow chart
 
@@ -294,6 +302,8 @@ Each function is generic, and developers can import them outside this project co
      **Test**:
      - Special characters, spaces, and numbers did not trigger any new prompts.
      - Pressing Enter caused the algorithm to restart as expected.
+
+1. Test in Python Linter returned no issue.
 
 ## Bugs fixing
 
