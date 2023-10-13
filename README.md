@@ -40,7 +40,6 @@ Live link to [Secure Password Generator](https://secure-password-generator-618a9
     - [Heroku](#heroku)
     - [Local](#local)
   - [Credits](#credits)
-  - [Notes](#notes)
 
  ---
 
@@ -397,6 +396,8 @@ Each function is generic, and developers can import them outside this project co
 **Solution**: During the restyling of the code to meet flake8 rules, the developer in function `update_account`added `not password.secure` instead of just `password.secure`. To resolve the issue, remove the `not` keyword.
 1. **Issue**: Selecting more than `30` special characters resulted in an error.  
 **Solution**:  Replace `random.sample` with `random.choices` in the `generate_random_special_characters` function. Using `random.choices` allows the user to select more characters than the length of the list of special characters.
+1. **Issue**: The developer cloned this repository on a different device. When he pushed the commit, he did not realize he had logged in to GitHub with a different account. Therefore, two contributors appeared in the repository.
+**Solution**: The developer performed a git hard reset to the last commit of the repository contributor. After two days, two contributors still appeared in the repository, suggesting that the issue was unrelated to the GitHub cache. The developer deleted the second account from Github, and the second contributor disappeared.
 
 ## Deployment
 

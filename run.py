@@ -77,9 +77,11 @@ def get_account_data():
         print("Please enter the service for which you need the password")
         print("Example: Netflix")
         service = input("Enter the name of the service here:\n")
+        service = "Not provided" if len(service) < 1 else service
         print("Please enter the username")
         print("Example: my_email@provider.com or SecureUser")
         username = input("Enter the username here:\n")
+        username = "Not provided" if len(username) < 1 else username
         print(f"You are a creating a password for {service} and your username"
               f"is {username}")
         else_account_approval = True
@@ -270,8 +272,8 @@ def show_output_in_terminal(account):
     quit_input = input("Press Enter to generate a password"
                        " for a new Account or Q to quit\n").lower()
     os.system('cls' if os.name == 'nt' else 'clear')
-    quit = True if quit_input == "q" else False
-    return quit
+    quit_generator = True if quit_input == "q" else False
+    return quit_generator
 
 
 def create_password_file(account, filename="secure_passwords.csv"):
@@ -302,15 +304,15 @@ def main():
     """
     Main function
     """
-    quit = True
+    quit_generator = True
     while True:
-        show_intro() if quit else None
+        show_intro() if quit_generator else None
         account = get_account_data()
         password_info = get_password_info()
         password = generate_password(password_info)
         password_api = api_verification(password)
         updated_account = update_account(account, password_api)
-        quit = show_output_in_terminal(updated_account)
+        quit_generator = show_output_in_terminal(updated_account)
         create_password_file(updated_account)
 
 
